@@ -1,0 +1,7 @@
+{
+  "name": "peniel_beach",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
