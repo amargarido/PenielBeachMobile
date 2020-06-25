@@ -8,12 +8,15 @@ import { DashboardPageRoutingModule } from './dashboard-routing.module';
 
 import { DashboardPage } from './dashboard.page';
 
+//import { WordpressService } from '../services/wordpress.service';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     DashboardPageRoutingModule
+//   , WordpressService
   ],
   declarations: [DashboardPage]
 })

@@ -8,6 +8,7 @@ import { HttpClient } from  '@angular/common/http';
 import { tap } from  'rxjs/operators';
 import { User } from  '../authinterface/user';
 import { AuthResponse } from  '../authinterface/auth-response';
+import { GlobalConstants } from '../common/global-constants';
 
 
 @Injectable({
@@ -16,9 +17,8 @@ import { AuthResponse } from  '../authinterface/auth-response';
 export class AuthenticationService {
 
   authState = new BehaviorSubject(false);
-// authSubject  =  new  BehaviorSubject(false);
 
-  AUTH_SERVER_ADDRESS:  string  =  'http://penielbeach.com.br';
+  AUTH_SERVER_ADDRESS:  string  = GlobalConstants.serverAddress;
   
 
   constructor(

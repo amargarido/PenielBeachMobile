@@ -12,44 +12,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthenticationService } from './services/authentication.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { WordpressService } from './services/wordpress.service';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, 
+            IonicStorageModule.forRoot(), HttpClientModule,],
   providers: [
     StatusBar,
     SplashScreen,
     AuthGuardService,
     AuthenticationService,
+    WordpressService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
-
-
-/////////////////////
-/*  exemplo
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  entryComponents: [],
-  imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
-    AppRoutingModule,
-    IonicStorageModule.forRoot()
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    AuthGuard,
-    AuthenticationService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-*/
