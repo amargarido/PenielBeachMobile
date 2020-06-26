@@ -40,7 +40,7 @@ pages: any;
             //console.log('post:' +post);
               // trata imagem
               post.media_url = post['_embedded']['wp:featuredmedia'][0]['media_details'].sizes['thumbnail'].source_url;
-              console.log(post.media_url);
+        // LOG      console.log(post.media_url);
           }
           return data;
       })
