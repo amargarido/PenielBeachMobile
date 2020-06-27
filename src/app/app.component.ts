@@ -13,6 +13,28 @@ import { AuthenticationService } from './services/authentication.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+
+  dark: boolean = true;
+
+  appPages = [
+    {
+      title: 'Atividades',
+      url: '/app/tabs/atividades',
+      icon: 'calendar'
+    },
+    {
+      title: 'Pedido Oração',
+      url: '/app/tabs/pedidosoracao',
+      icon: 'people'
+    },
+    {
+      title: 'Comunidade',
+      url: '/app/tabs/comuniade',
+      icon: 'map'
+    }
+  ];
+
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -24,6 +46,8 @@ export class AppComponent {
   ) {
     this.initializeApp();
   }
+
+  
 
   initializeApp() {
 

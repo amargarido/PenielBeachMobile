@@ -4,27 +4,24 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { TutorialCheckService }    from './services/tutorial-check.service';
 
 const routes: Routes = [
-
-  {
-    path: 'app',
-    loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsPagePageModule)
-  },
-
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
   {
     path: '',
     redirectTo: 'tutorial', // login
     pathMatch: 'full'
   },
   {
+    path: 'app',
+    loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsPagePageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },
+  {
     path: 'tutorial',
     loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialPageModule)
     ,canLoad: [TutorialCheckService]
   },
-
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
@@ -40,24 +37,22 @@ const routes: Routes = [
   },
   {
     path: 'atividades',
-    loadChildren: () => import('./pages/atividades/atividades.module').then( m => m.AtividadesPageModule)
+    loadChildren: () => import('./pages/atividades/atividades.module').then( m => m.AtividadesPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'pedidos-oracao',
-    loadChildren: () => import('./pages/pedidos-oracao/pedidos-oracao.module').then( m => m.PedidosOracaoPageModule)
+    loadChildren: () => import('./pages/pedidos-oracao/pedidos-oracao.module').then( m => m.PedidosOracaoPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'comunidade',
-    loadChildren: () => import('./pages/comunidade/comunidade.module').then( m => m.ComunidadePageModule)
+    loadChildren: () => import('./pages/comunidade/comunidade.module').then( m => m.ComunidadePageModule),
+    canActivate: [AuthGuardService]
   },
 ];
 
 /* alberto
-  {
-    path: '',
-    redirectTo: '/tutorial',
-    pathMatch: 'full'
-  },
   {
     path: 'account',
     loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule)
@@ -77,11 +72,6 @@ const routes: Routes = [
   {
     path: 'app',
     loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
-  },
-  {
-    path: 'tutorial',
-    loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
-    canLoad: [CheckTutorial]
   }
 
 */
@@ -93,5 +83,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-

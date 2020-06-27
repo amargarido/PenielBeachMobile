@@ -47,7 +47,8 @@ export class AuthenticationService {
       user_name: 'test'
     };
     this.storage.set('USER_INFO', dummy_response).then((response) => {
-      this.router.navigate(['dashboard']);
+      // nao funciona this.router.navigate(['/app']);
+      this.router.navigateByUrl('/app/tabs/atividades', { replaceUrl: true })
       this.authState.next(true);
     });
   }
