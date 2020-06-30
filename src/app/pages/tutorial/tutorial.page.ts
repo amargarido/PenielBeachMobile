@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { Storage } from '@ionic/storage';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tutorial',
@@ -12,12 +12,12 @@ export class TutorialPage implements OnInit {
 
   slideOpts = {
     initialSlide: 1,
-    speed: 400
+    speed: 700
   };
   
   constructor(
     private router: Router,
-    private storage: Storage
+    private menu: MenuController
   ) {}
 
   ngOnInit() {
@@ -29,11 +29,10 @@ export class TutorialPage implements OnInit {
       this.showSkip = !isEnd;
     });
   }
-
+// this.router.navigate(['login']);
   startApp() {
-    this.router
-      .navigateByUrl('/app/tabs/atividades', { replaceUrl: true })
-      .then(() => this.storage.set('ion_did_tutorial', true));
+    this.menu.enable(true);
+    this.router.navigateByUrl('/login');
   }
 
 }

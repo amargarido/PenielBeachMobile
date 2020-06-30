@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { MenuController, Platform, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
+import { Storage } from '@ionic/storage';
+//import { SwUpdate } from '@angular/service-worker';
+
 
 @Component({
   selector: 'app-root',
@@ -15,6 +18,7 @@ import { AuthenticationService } from './services/authentication.service';
 export class AppComponent {
 
   dark: boolean = true;
+  loggedIn: boolean = false;
 
   appPages = [
     {
@@ -25,12 +29,12 @@ export class AppComponent {
     {
       title: 'Pedido Oração',
       url: '/app/tabs/pedidosoracao',
-      icon: 'people'
+      icon: 'person-circle'
     },
     {
       title: 'Comunidade',
-      url: '/app/tabs/comuniade',
-      icon: 'map'
+      url: '/app/tabs/comunidade',
+      icon: 'people-circle'
     }
   ];
 
@@ -41,10 +45,132 @@ export class AppComponent {
     private statusBar: StatusBar,
 
     private router: Router,
-    private authenticationService: AuthenticationService
-
+    private authService: AuthenticationService,
+    private menu: MenuController,
+    private storage: Storage,
+    private toastCtrl: ToastController,
   ) {
-    this.initializeApp();
+     this.initializeApp();
+  }
+
+  async ngOnInit() {
+    this.checkLoginStatus();
+    this.listenForLoginEvents();
+
+    // this.swUpdate.available.subscribe(async res => {
+    //   const toast = await this.toastCtrl.create({
+    //     message: 'Update available!',
+    //     position: 'bottom',
+    //     buttons: [
+    //       {
+    //         role: 'cancel',
+    //         text: 'Reload'
+    //       }
+    //     ]
+    //   });
+
+    //   await toast.present();
+
+    //   toast
+    //     .onDidDismiss()
+    //     .then(() => this.swUpdate.activateUpdate())
+    //     .then(() => window.location.reload());
+    // });
+  }
+
+  initializeApp() {
+
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
+  }
+
+  checkLoginStatus() {
+    return this.authService.isLoggedIn().then(loggedIn => {
+      return this.updateLoggedInStatus(loggedIn);
+    });
+  }
+
+  updateLoggedInStatus(loggedIn: boolean) {
+    setTimeout(() => {
+      
+      this.loggedIn = loggedIn;
+      console.log('updateLoggedInStatus: ' + this.loggedIn);
+
+      if(this.loggedIn){
+        this.router.navigate(['/app'])
+
+      } else {
+        this.router.navigate(['login'])
+
+      }
+
+
+
+    }, 300);
+  }
+
+  listenForLoginEvents() {
+    window.addEventListener('user:login', () => {
+      this.updateLoggedInStatus(true);
+    });
+
+    window.addEventListener('user:signup', () => {
+      this.updateLoggedInStatus(true);
+    });
+
+    window.addEventListener('user:logout', () => {
+      this.updateLoggedInStatus(false);
+    });
+  }
+
+  logout() {
+    this.authService.logout().then(() => {
+      return this.router.navigate(['login']);
+    });
+  }
+
+  openTutorial() {
+    this.menu.enable(false);
+    this.storage.set('ion_did_tutorial', false);
+    this.router.navigateByUrl('/tutorial');
+  }
+
+}
+
+/*
+
+  checkLoginStatus() {
+    return this.userData.isLoggedIn().then(loggedIn => {
+      return this.updateLoggedInStatus(loggedIn);
+    });
+  }
+
+  updateLoggedInStatus(loggedIn: boolean) {
+    setTimeout(() => {
+      this.loggedIn = loggedIn;
+    }, 300);
+  }
+
+  listenForLoginEvents() {
+    window.addEventListener('user:login', () => {
+      this.updateLoggedInStatus(true);
+    });
+
+    window.addEventListener('user:signup', () => {
+      this.updateLoggedInStatus(true);
+    });
+
+    window.addEventListener('user:logout', () => {
+      this.updateLoggedInStatus(false);
+    });
+  }
+
+  logout() {
+    this.userData.logout().then(() => {
+      return this.router.navigateByUrl('/app/tabs/schedule');
+    });
   }
 
   
@@ -59,19 +185,23 @@ export class AppComponent {
       
       this.authenticationService.authState.subscribe(state => {
 
+        console.log('Authenticate state:');
         console.log(state);
-/*
+
         if (state) {
-          // this.router.navigate(['dashboard']);
+          this.router.navigate(['/app', 'tabs']);
         } else {
           this.router.navigate(['login']);
         }
-*/        
+
       });
-    
-
     });
+  }
 
-    
+  openTutorial() {
+    this.menu.enable(false);
+    this.storage.set('ion_did_tutorial', false);
+    this.router.navigate(['tutorial']);
   }
 }
+*/
