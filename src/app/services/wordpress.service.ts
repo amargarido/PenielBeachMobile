@@ -37,9 +37,16 @@ pages: any;
 
           for(let post of data){
 
-            //console.log('post:' +post);
+            console.log('post:');
+            console.log(post);
               // trata imagem
-              post.media_url = post['_embedded']['wp:featuredmedia'][0]['media_details'].sizes['thumbnail'].source_url;
+            
+              try {
+                post.media_url = post['_embedded']['wp:featuredmedia'][0]['media_details'].sizes['thumbnail'].source_url;  
+              } catch (error) {
+                console.log(error);
+              }
+              
         // LOG      console.log(post.media_url);
           }
           return data;

@@ -10,9 +10,10 @@ export class AuthGuardService implements CanActivate {
 
   constructor(
     public authService: AuthenticationService
-      ) {}
-  canActivate(): boolean {
-   return this.authService.authSerIsLoggedIn;
+  ) { }
+  canActivate(): Promise<boolean> {
+
+    return this.authService.isLoggedIn();
   }
 
 }

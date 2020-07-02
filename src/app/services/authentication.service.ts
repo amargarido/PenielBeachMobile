@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+//import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { ToastController, Platform } from '@ionic/angular';
+import { ToastController/*, Platform*/ } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +10,15 @@ export class AuthenticationService {
 
 
   favorites: string[] = [];
-  HAS_LOGGED_IN = 'hasLoggedIn';
-  HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
-  authSerIsLoggedIn: boolean = false;
+  HAS_LOGGED_IN:string = 'hasLoggedIn';
+  HAS_SEEN_TUTORIAL:string = 'hasSeenTutorial';
 
   constructor(
-    private router: Router,
+//    private router: Router,
     private storage: Storage,
-    private platform: Platform,
+//    private platform: Platform,
     public toastController: ToastController
   ) { }
-
 
   async login(username: string): Promise<any> {
     await this.storage.set(this.HAS_LOGGED_IN, true);
@@ -40,7 +38,6 @@ export class AuthenticationService {
     return window.dispatchEvent(new CustomEvent('user:signup'));
   }
 
-
   hasFavorite(sessionName: string): boolean {
     return (this.favorites.indexOf(sessionName) > -1);
   }
@@ -56,7 +53,6 @@ export class AuthenticationService {
     }
   }
 
-
   setUsername(username: string): Promise<any> {
     return this.storage.set('username', username);
   }
@@ -68,13 +64,13 @@ export class AuthenticationService {
 
   async isLoggedIn(): Promise<boolean> {
     const value = await this.storage.get(this.HAS_LOGGED_IN);
-    this.authSerIsLoggedIn = value;
     return value === true;
   }
-
+/*
   async checkHasSeenTutorial(): Promise<string> {
     const value = await this.storage.get(this.HAS_SEEN_TUTORIAL);
     return value;
   }
+*/
 
 }
