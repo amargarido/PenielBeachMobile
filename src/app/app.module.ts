@@ -14,9 +14,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AuthenticationService } from './services/authentication.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WordpressService } from './services/wordpress.service';
-// import { ServiceWorkerModule } from '@angular/service-worker';
-// import { environment } from '../environments/environment';
-// import { FormsModule } from '@angular/forms'; // alberto
+import { JwtInterceptor } from './interceptors/JwtInterceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +35,8 @@ import { WordpressService } from './services/wordpress.service';
     AuthGuardService,
     AuthenticationService,
     WordpressService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }    
   ],
   bootstrap: [AppComponent]
 })

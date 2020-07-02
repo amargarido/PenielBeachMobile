@@ -18,6 +18,4 @@ export class LogoutPage implements OnInit {
   logoutUser(){
     this.authService.logout();
   }
-
-
 }

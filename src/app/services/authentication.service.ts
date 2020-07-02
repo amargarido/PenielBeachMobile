@@ -1,35 +1,45 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { ToastController/*, Platform*/ } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { GlobalConstants } from '../common/global-constants';
 
+import { BehaviorSubject, from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { AuthResponse } from '../authinterface/auth-response';
+
+const JWT_KEY:string = 'hasLoggedToken';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class AuthenticationService /*ApiService sample*/ {
 
 
   favorites: string[] = [];
   HAS_LOGGED_IN:string = 'hasLoggedIn';
-  JWT_KEY:string = 'hasLoggedToken';
+  
   HAS_SEEN_TUTORIAL:string = 'hasSeenTutorial';
 
+  private user = new BehaviorSubject(null);
+
   constructor(
-//    private router: Router,
-    private storage: Storage,
-//    private platform: Platform,
-    private http: HttpClient,
-    public toastController: ToastController
-  ) { }
+    private http: HttpClient, 
+    private storage: Storage, 
+    private plt: Platform
+    ){
+    this.plt.ready().then(() => {
+      this.storage.get(JWT_KEY).then(data => {
+        if (data) {
+          this.user.next(data);
+        }
+      })
+    })
+  }
+
 
   
   async registerLogin(logData: AuthResponse): Promise<any> {
-
-
 
     console.log('REGISTERlOGIN');
     console.log(logData.token);
@@ -37,27 +47,29 @@ export class AuthenticationService {
     
 
     await this.storage.set(this.HAS_LOGGED_IN, true);
-    await this.storage.set(this.JWT_KEY, logData.token);
+    await this.storage.set(JWT_KEY, logData.token);
     //OK this.setUsername(username);
     return window.dispatchEvent(new CustomEvent('user:login'));
   }
 
-/////////////////////////////
-
-
-
-
-
-
-  doLogin(/*username: string, password: string*/) {
+  doLogin(username: string, password: string) {
 
     console.log('doLogin.CALL');
 
     return this.http.post<any>(GlobalConstants.siteApiURL + '/jwt-auth/v1/token', 
-      {
-        username: 'betomano',
-        password: 'M@noB3t02021'
-      } )
+      { username, 
+        password 
+      }
+     ).pipe(
+
+        switchMap(data => {
+          return from(this.storage.set(JWT_KEY, data));
+        }),
+        tap(data => {
+          this.user.next(data);
+        })
+
+        /*
         .pipe(map(user => {
   
           console.log('doLogin.user:');
@@ -67,14 +79,32 @@ export class AuthenticationService {
         }
 
       )
+      */
     );
   }
   
+  // TODO signUp(username, email, password)
+  // TODO resetPassword(usernameOrEmail)
+
+  getCurrentUser() {
+    return this.user.asObservable();
+  }
+ 
+  getUserValue() {
+    return this.user.getValue();
+  }
+
 
   async logout(): Promise<any> {
+  
+  
     await this.storage.remove(this.HAS_LOGGED_IN);
     await this.storage.remove('username');
     window.dispatchEvent(new CustomEvent('user:logout'));
+
+    this.storage.remove(JWT_KEY).then(() => {
+      this.user.next(null);
+    });
   }
 
   async signup(username: string): Promise<any> {
@@ -82,6 +112,12 @@ export class AuthenticationService {
     this.setUsername(username);
     return window.dispatchEvent(new CustomEvent('user:signup'));
   }
+
+
+
+  
+  
+
 
   hasFavorite(sessionName: string): boolean {
     return (this.favorites.indexOf(sessionName) > -1);

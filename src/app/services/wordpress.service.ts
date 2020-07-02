@@ -17,6 +17,24 @@ export class WordpressService {
 
   constructor(private http: HttpClient) { }
 
+
+
+  getPrivatePosts() {
+    return this.http.get<any[]>(GlobalConstants.siteApiURL +'/wp/v2/posts?_embed&status=private').pipe(
+      map(data => {
+        for (let post of data) {
+          if (post['_embedded']['wp:featuredmedia']) {
+            post.media_url =
+              post['_embedded']['wp:featuredmedia'][0]['media_details'].sizes['medium'].source_url;
+          }
+        }
+        return data;
+      })
+    );
+  }
+
+
+
   getAtividades(page = 1): Observable<any[]> {
 
     let options = {
