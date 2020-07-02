@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { WordpressService } from '../../services/wordpress.service';
-import { AuthenticationService } from '../../services/authentication.service';
+
 
 @Component({
   selector: 'app-comunidade',
@@ -10,13 +10,11 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class ComunidadePage implements OnInit {
 
-  // comunidades: Observable<any[]>;
   comunidades = [];
   page = 1;
   count = null;
 
   constructor(
-    private authService: AuthenticationService,
     private wp: WordpressService
   )
   { }
@@ -46,10 +44,6 @@ export class ComunidadePage implements OnInit {
       }
 
     })
-  }
-
-  logoutUser(){
-    this.authService.logout();
   }
 
 }

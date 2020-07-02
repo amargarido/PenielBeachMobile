@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { WordpressService} from '../../services/wordpress.service';
+
 @Component({
   selector: 'app-atividades',
   templateUrl: './atividades.page.html',
@@ -7,9 +9,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AtividadesPage implements OnInit {
 
-  constructor() { }
+  atividades = [];
+  page = 1;
+  count = null;
 
-  ngOnInit() {
+  showSearchbar: boolean = false;
+
+  constructor(
+    private wp: WordpressService
+  )
+  { }
+
+  async ngOnInit() {
+
+    this.wp.getAtividades().subscribe(res =>{
+      this.count = this.wp.totalAtividades;
+      this.atividades = res;
+
+    })
+  }
+
+  async loadMore(event){
+
+    this.page++;
+
+    this.wp.getAtividades(this.page).subscribe(res =>{
+      
+      this.atividades = [...this.atividades, ...res];
+
+      event.target.complete();
+  
+      if( this.page == this.wp.pagesAtividades ){
+
+        event.target.disabled = true;
+      }
+
+    })
   }
 
 }

@@ -7,3 +7,10 @@
 //         expires_in: number
 //     }
 // }
+
+export interface AuthResponse {
+    token: string;
+    user_email: string;
+    user_nicename: String;
+    user_display_name: String;
+  }

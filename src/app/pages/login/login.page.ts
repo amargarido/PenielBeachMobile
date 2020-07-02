@@ -3,7 +3,6 @@ import { AuthenticationService } from '../../services/authentication.service';
 
 import { MenuController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -23,7 +22,33 @@ export class LoginPage implements OnInit {
 
   loginUser(){
     this.menu.enable(true);
-    this.authService.login('username_aqui'); // todo
+
+
+    this.authService.doLogin()
+      // resp is of type `HttpResponse<Config>`
+      .subscribe(resp => {
+        // display its headers
+  //      const keys = resp.headers.keys();
+        // this.headers = keys.map(key =>
+        //   `${key}: ${resp.headers.get(key)}`);
+  
+        // access the body directly, which is typed as `Config`.
+        //this.config = { ...  };
+
+
+        this.authService.registerLogin(resp); 
+
+      });
+
+
+
+
+    //this.authService.login(); // todo ?
   }
+
+  showConfigResponse() {
+  }
+  
+
 
 }
