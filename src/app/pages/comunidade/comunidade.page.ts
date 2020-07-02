@@ -10,22 +10,22 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class ComunidadePage implements OnInit {
 
-  // posts: Observable<any[]>;
-  posts = [];
+  // comunidades: Observable<any[]>;
+  comunidades = [];
   page = 1;
   count = null;
 
   constructor(
     private authService: AuthenticationService,
     private wp: WordpressService
-    )
+  )
   { }
 
   async ngOnInit() {
 
-    this.wp.getPosts().subscribe(res =>{
-      this.count = this.wp.totalPosts;
-      this.posts = res;
+    this.wp.getComunidades().subscribe(res =>{
+      this.count = this.wp.totalComunidades;
+      this.comunidades = res;
 
     })
   }
@@ -34,21 +34,18 @@ export class ComunidadePage implements OnInit {
 
     this.page++;
 
-    this.wp.getPosts(this.page).subscribe(res =>{
+    this.wp.getComunidades(this.page).subscribe(res =>{
       
-      this.posts = [...this.posts, ...res];
+      this.comunidades = [...this.comunidades, ...res];
 
       event.target.complete();
-      // loading.dismiss();
-
+  
       if( this.page == this.wp.pages ){
 
         event.target.disabled = true;
-
       }
 
     })
-
   }
 
   logoutUser(){
