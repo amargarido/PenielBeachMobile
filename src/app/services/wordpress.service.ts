@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GlobalConstants} from '../common/global-constants';
+import { GlobalConstants } from '../common/global-constants';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -10,51 +10,52 @@ import { map } from 'rxjs/operators';
 })
 export class WordpressService {
 
-totalPosts = null;
-pages: any;
+  totalPosts = null;
+  pages: any;
 
   constructor(private http: HttpClient) { }
 
-  
-  getPosts(page = 1)/*: Observable<any[]>*/ {
+
+  getPosts(page = 1): Observable<any[]> {
 
     let options = {
       observe: "response" as "body",
       params: {
         per_page: '1',
-        page: ''+page
-    }
-  
-  };
+        page: '' + page
+      }
 
-    return this.http.get<any[]>( GlobalConstants.siteApiURL + '/wp/v2/posts?_embed', options ).pipe(
-      map(resp=>{
+    };
 
-          this.pages      = resp['headers'].get('x-wp-totalpages');
-          this.totalPosts = resp['headers'].get('x-wp-total');
+    return this.http.get<any[]>(GlobalConstants.siteApiURL + '/wp/v2/posts?_embed', options).pipe(
+      map(resp => {
 
-          let data = resp['body'];
+        this.pages = resp['headers'].get('x-wp-totalpages');
+        this.totalPosts = resp['headers'].get('x-wp-total');
 
-          for(let post of data){
+        let data = resp['body'];
 
-            console.log('post:');
-            console.log(post);
-              // trata imagem
-            
-              try {
-                post.media_url = post['_embedded']['wp:featuredmedia'][0]['media_details'].sizes['thumbnail'].source_url;  
-              } catch (error) {
-                console.log(error);
-              }
-              
-        // LOG      console.log(post.media_url);
+        for (let post of data) {
+
+          console.log('post:');
+          console.log(post);
+          // trata imagem
+
+          try {
+            post.media_url = post['_embedded']['wp:featuredmedia'][0]['media_details'].sizes['thumbnail'].source_url;
+          } catch (error) {
+            console.log('wordpress.service|getPosts.error:');
+            console.log(error);
           }
-          return data;
+
+          // LOG      console.log(post.media_url);
+        }
+        return data;
       })
     );
   }
 
-  getPostContent(){ // 8:01
+  getPostContent() { // 8:01
 
   }
 
