@@ -40,7 +40,7 @@ export class ComunidadePage implements OnInit {
 
       event.target.complete();
   
-      if( this.page == this.wp.pages ){
+      if( this.page == this.wp.pagesComunidades ){
 
         event.target.disabled = true;
       }

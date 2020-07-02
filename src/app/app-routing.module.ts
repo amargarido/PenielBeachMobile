@@ -6,7 +6,7 @@ import { TutorialCheckService }    from './services/tutorial-check.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'app', // tutorial
+    redirectTo: 'app', 
     pathMatch: 'full'
   },
   {
