@@ -19,19 +19,19 @@ export class WordpressService {
 
 
 
-  getPrivatePosts() {
-    return this.http.get<any[]>(GlobalConstants.siteApiURL +'/wp/v2/posts?_embed&status=private').pipe(
-      map(data => {
-        for (let post of data) {
-          if (post['_embedded']['wp:featuredmedia']) {
-            post.media_url =
-              post['_embedded']['wp:featuredmedia'][0]['media_details'].sizes['medium'].source_url;
-          }
-        }
-        return data;
-      })
-    );
-  }
+  // getPrivatePosts() {
+  //   return this.http.get<any[]>(GlobalConstants.siteApiURL +'/wp/v2/posts?_embed&status=private').pipe(
+  //     map(data => {
+  //       for (let post of data) {
+  //         if (post['_embedded']['wp:featuredmedia']) {
+  //           post.media_url =
+  //             post['_embedded']['wp:featuredmedia'][0]['media_details'].sizes['medium'].source_url;
+  //         }
+  //       }
+  //       return data;
+  //     })
+  //   );
+  // }
 
 
 
@@ -39,10 +39,10 @@ export class WordpressService {
 
     let options = {
       observe: "response" as "body",
-      params: {
-        per_page: '2',
-        page: '' + page
-      }
+      // params: {
+      //   per_page: '2',
+      //   page: '' + page
+      // }
     };
 
     return this.http.get<any[]>(GlobalConstants.siteApiURL + '/buddypress/v1/activity?_embed', options).pipe(
@@ -82,13 +82,13 @@ export class WordpressService {
 
     let options = {
       observe: "response" as "body",
-      params: {
-        per_page: '2',
-        page: '' + page
-      }
+      // params: {
+      //   per_page: '2',
+      //   page: '' + page
+      // }
     };
-
-    return this.http.get<any[]>(GlobalConstants.siteApiURL + '/wp/v2/posts?_embed', options).pipe(
+// &status=private
+    return this.http.get<any[]>(GlobalConstants.siteApiURL + '/wp/v2/posts?_embed'/*, options*/).pipe(
       map(resp => {
 
         this.pagesComunidades = resp['headers'].get('x-wp-totalpages');

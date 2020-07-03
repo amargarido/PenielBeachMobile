@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { WordpressService} from '../../services/wordpress.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-atividades',
@@ -15,18 +16,35 @@ export class AtividadesPage implements OnInit {
 
   showSearchbar: boolean = false;
 
-  constructor(
-    private wp: WordpressService
-  )
-  { }
+  user = this.authService.getCurrentUser();
+  
 
-  async ngOnInit() {
+  constructor(
+    private wp: WordpressService,
+    private authService: AuthenticationService
+  )
+  { 
+    this.user.subscribe(user => {
+      if (user) {
+        this.loadAtividadesPosts();
+      } else {
+        this.atividades = [];
+      }
+    });
+  }
+
+  ngOnInit() {
+
+  }
+
+  loadAtividadesPosts() {
 
     this.wp.getAtividades().subscribe(res =>{
       this.count = this.wp.totalAtividades;
       this.atividades = res;
 
     })
+
   }
 
   async loadMore(event){
