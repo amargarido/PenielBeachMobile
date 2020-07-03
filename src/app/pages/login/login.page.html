@@ -21,7 +21,7 @@
           <ion-input formControlName="email"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Password</ion-label>
+          <ion-label position="floating">Senha</ion-label>
           <ion-input type="password" formControlName="password"></ion-input>
         </ion-item>
 
@@ -35,7 +35,7 @@
   <ng-template #welcome>
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Welcome back!</ion-card-title>
+        <ion-card-title>Olá {{ ( user.user_display_name | async)}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         {{ ( user | async) | json }}

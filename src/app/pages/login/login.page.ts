@@ -65,7 +65,10 @@ export class LoginPage implements OnInit {
         this.userForm.value.username, 
         this.userForm.value.password)
       .subscribe(
-      res => {},
+      resp => {
+
+        this.authService.registerLogin(resp); 
+      },
       err => {
         this.showError(err);
       }

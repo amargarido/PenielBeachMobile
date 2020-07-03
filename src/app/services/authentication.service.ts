@@ -5,16 +5,15 @@ import { GlobalConstants } from '../common/global-constants';
 
 import { BehaviorSubject, from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { AuthResponse } from '../authinterface/auth-response';
 
 const JWT_KEY:string = 'hasLoggedToken';
 
 @Injectable({
   providedIn: 'root'
-})
-export class AuthenticationService /*ApiService sample*/ {
-
+})        /* ApiService sample */
+export class AuthenticationService {
 
   favorites: string[] = [];
   HAS_LOGGED_IN:string = 'hasLoggedIn';
@@ -41,10 +40,9 @@ export class AuthenticationService /*ApiService sample*/ {
   
   async registerLogin(logData: AuthResponse): Promise<any> {
 
-    console.log('REGISTERlOGIN');
+    console.log('registerLogin');
     console.log(logData.token);
     console.log(logData.user_email);
-    
 
     await this.storage.set(this.HAS_LOGGED_IN, true);
     await this.storage.set(JWT_KEY, logData.token);
@@ -63,7 +61,9 @@ export class AuthenticationService /*ApiService sample*/ {
      ).pipe(
 
         switchMap(data => {
-          return from(this.storage.set(JWT_KEY, data));
+          return from(
+            this.storage.set(JWT_KEY, data)
+            );
         }),
         tap(data => {
           this.user.next(data);
