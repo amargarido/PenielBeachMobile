@@ -40,7 +40,7 @@ export class WordpressService {
     let options = {
       observe: "response" as "body",
       params: {
-        per_page: '2',
+        per_page: '10',
         page: '' + page
       }
     };
@@ -83,7 +83,7 @@ export class WordpressService {
     let options = {
       observe: "response" as "body",
       params: {
-        per_page: '2',
+        per_page: '10',
         page: '' + page
       }
     };
