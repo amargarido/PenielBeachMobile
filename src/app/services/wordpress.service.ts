@@ -39,10 +39,10 @@ export class WordpressService {
 
     let options = {
       observe: "response" as "body",
-      // params: {
-      //   per_page: '2',
-      //   page: '' + page
-      // }
+      params: {
+        per_page: '2',
+        page: '' + page
+      }
     };
 
     return this.http.get<any[]>(GlobalConstants.siteApiURL + '/buddypress/v1/activity?_embed', options).pipe(
@@ -82,13 +82,12 @@ export class WordpressService {
 
     let options = {
       observe: "response" as "body",
-      // params: {
-      //   per_page: '2',
-      //   page: '' + page
-      // }
+      params: {
+        per_page: '2',
+        page: '' + page
+      }
     };
-// &status=private
-    return this.http.get<any[]>(GlobalConstants.siteApiURL + '/wp/v2/posts?_embed'/*, options*/).pipe(
+    return this.http.get<any[]>(GlobalConstants.siteApiURL + '/wp/v2/posts?_embed&status=private', options).pipe(
       map(resp => {
 
         this.pagesComunidades = resp['headers'].get('x-wp-totalpages');
