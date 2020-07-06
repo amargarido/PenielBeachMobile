@@ -45,6 +45,10 @@ const routes: Routes = [
     path: 'logout',
     loadChildren: () => import('./pages/logout/logout.module').then( m => m.LogoutPageModule)
   },
+  {
+    path: 'culto-ao-vivo',
+    loadChildren: () => import('./pages/culto-ao-vivo/culto-ao-vivo.module').then( m => m.CultoAoVivoPageModule)
+  },
 ];
 
 @NgModule({

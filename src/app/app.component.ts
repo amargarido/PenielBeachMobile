@@ -17,15 +17,10 @@ import { Storage } from '@ionic/storage';
 })
 export class AppComponent {
 
-  dark: boolean = true;
+  dark: boolean = false;
   loggedIn: boolean = false;
 
-  appPages = [
-    {
-      title: 'Atividades',
-      url: '/app/tabs/atividades',
-      icon: 'calendar'
-    },
+  muralPages = [
     {
       title: 'Pedido Oração',
       url: '/app/tabs/pedidosoracao',
@@ -35,8 +30,25 @@ export class AppComponent {
       title: 'Comunidade',
       url: '/app/tabs/comunidade',
       icon: 'people-circle'
+    },
+    {
+      title: 'Atividades',
+      url: '/app/tabs/atividades',
+      icon: 'calendar'
     }
+
   ];
+
+
+  cultoAoVivoPages = [
+    {
+      title: 'Culto ao Vivo',
+      url: 'culto-ao-vivo',
+      icon: 'play-circle'
+    }
+
+  ];
+
 
 
   constructor(

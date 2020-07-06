@@ -11,10 +11,6 @@ const routes: Routes = [
     component: TabsPagePage,
     children: [
       {
-        path: 'atividades',
-        loadChildren: () => import('../atividades/atividades.module').then(m => m.AtividadesPageModule)
-      },
-      {
         path: 'pedidosoracao',
         loadChildren: () => import('../pedidos-oracao/pedidos-oracao.module').then(m => m.PedidosOracaoPageModule)
       },
@@ -22,6 +18,11 @@ const routes: Routes = [
         path: 'comunidade',
         loadChildren: () => import('../comunidade/comunidade.module').then(m => m.ComunidadePageModule)
       },
+      {
+        path: 'atividades',
+        loadChildren: () => import('../atividades/atividades.module').then(m => m.AtividadesPageModule)
+      },
+
       {
         path: '',
         redirectTo: '/app/tabs/atividades',
