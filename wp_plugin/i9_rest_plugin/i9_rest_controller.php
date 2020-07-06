@@ -2,11 +2,11 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
- * Plugin Name: i9 REST
+ * Plugin Name: i9 REST (Usado somente pelo APP Mobile)
  * Plugin URI: http://meta.eti.br
- * Description: ExtenÃ§Ãµes REST usando um Controller.
+ * Description: i9 REST
  * Author: Alberto Margarido
- * Version: 0.1.0
+ * Version: 1.0.0
  * License: LGPL version 2.1
  * Network: True
  */
@@ -38,6 +38,37 @@ add_filter( 'rest_authentication_errors', function( $result ) {
     }
 );
 
+
+add_action( 'rest_api_init', 'i9create_api_pages_meta_field' );
+
+function i9create_api_pages_meta_field() {
+
+    // register_rest_field ( 'name-of-post-type', 'name-of-field-to-return', array-of-callbacks-and-schema() )
+    register_rest_field( 'page', 'i9page_meta_fields', 
+        array(
+            'get_callback' => 'i9get_page_meta_for_api',
+            'schema' => null,
+        )
+    );
+
+}
+
+function i9get_page_meta_for_api( $object ) {
+    //get the id of the post object array
+    $post_id = $object['id'];
+
+    //return the page meta
+    return get_post_meta( $post_id );
+}
+
+
+
+
+
+/*  OK
+
+// meta dados de posts
+
 add_action( 'rest_api_init', 'i9create_api_posts_meta_field' );
 
 function i9create_api_posts_meta_field() {
@@ -60,18 +91,5 @@ function i9get_post_meta_for_api( $object ) {
     return get_post_meta( $post_id );
 }
 
-/*  ACF plugin
-$post_type = "post";
-function i9_rest_prepare_post($data, $post, $request) {
-    $_data = $data->data;
-    $fields = get_fields($post->ID);
-    foreach ($fields as $key => $value) {
-        $_data[$key] = get_field($key, $post->ID);
-	}
-	//The helper function acf_photo_gallery contains array. Append this array to your data array
-	$_data['acf_photo_gallery'] = acf_photo_gallery('ACF_FIELD_NAME', $post->ID);
-    $data->data = $_data;
-    return $data;
-}
-add_filter("rest_prepare_{$post_type}", 'i9_rest_prepare_post', 10, 3);
+
 */
