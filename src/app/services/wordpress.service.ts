@@ -12,7 +12,7 @@ export class WordpressService {
 
   totalComunidades = null;
   pagesComunidades: any;
-  totalAtividades = null;  
+  totalAtividades = null;
   pagesAtividades: any;
 
   constructor(private http: HttpClient) { }
@@ -48,23 +48,22 @@ export class WordpressService {
     return this.http.get<any[]>(GlobalConstants.siteApiURL + '/buddypress/v1/activity?_embed', options).pipe(
       map(resp => {
 
-        this.pagesAtividades  = resp['headers'].get('x-wp-totalpages');
+        this.pagesAtividades = resp['headers'].get('x-wp-totalpages');
         this.totalAtividades = resp['headers'].get('x-wp-total');
 
         let data = resp['body'];
 
         for (let atividade of data) {
 
-          console.log('atividade:');
-          console.log(atividade);
+          // console.log('atividade:');
+          // console.log(atividade);
           // trata imagem
 
           try {
             atividade.media_url = atividade['_embedded'];//['wp:featuredmedia'][0]['media_details'].sizes['thumbnail'].source_url;
-            
-            console.log('Lendo _embedded:');
 
-            console.log(atividade.media_url);
+            // console.log('Lendo _embedded:');
+            // console.log(atividade.media_url);
           } catch (error) {
             console.log('wordpress.service|getAtividades.error:');
             console.log(error);
@@ -97,13 +96,13 @@ export class WordpressService {
 
         for (let comunidade of data) {
 
-          console.log('comunidade:');
-          console.log(comunidade);
+          // console.log('comunidade:');
+          // console.log(comunidade);
           // trata imagem
 
           try {
             comunidade.media_url = comunidade['_embedded']['wp:featuredmedia'][0]['media_details'].sizes['thumbnail'].source_url;
-            
+
             console.log(comunidade.media_url);
           } catch (error) {
             console.log('wordpress.service|getComunidades.error:');
@@ -120,7 +119,82 @@ export class WordpressService {
 
   }
 
+  //////////////
+
+  getIdPagina(): Promise<any> {
+
+    console.log('Entrei em getIdPagina()');
+
+    let paginaoptions = {
+      observe: "response" as "body",
+    };
+    return this.http.get<number>(
+      GlobalConstants.siteApiURL + '/wp/v2/pages?slug=escola-de-discipulo', paginaoptions).toPromise();
+
+  }
+
+
+  oretorno: any;
+
+  async getAPagina(): Promise<any> {
 
 
 
+    await this.getIdPagina().then(retorno => {
+
+
+      console.log('Valor de getIdPagina()  retorno');
+
+      console.log(retorno);
+
+      this.oretorno = retorno['body'][0]['id'];
+
+      console.log('Valor de getIdPagina()' + this.oretorno);
+    }
+    );
+
+    let options = {
+      observe: "response" as "body",
+      
+    };
+    return this.http.get<any>(GlobalConstants.siteApiURL + '/wp/v2/pages/' + this.oretorno, options).toPromise().then(
+      resp => {
+
+        // console.log('getAPagina... resp:');
+        // console.log(resp);
+
+        let data = resp['body'];
+
+        // console.log('getAPagina... data(body):');
+        // console.log(data);
+
+        // try {
+        //   console.log('data[i9page_meta_fields]');
+        //   console.log(data['i9page_meta_fields']);
+
+
+        //   try {
+        //     console.log('data[i9page_meta_fields][i9_app_escola_discipulo_url]');
+        //     console.log(data['i9page_meta_fields']['i9_app_escola_discipulo_url']);
+        //   } catch (error) {
+        //     console.log(error);
+        //   }
+
+
+        // } catch (error) {
+        //   console.log(error);
+        // }
+
+        return data;
+      }
+    );
+  }
+
+
+
+
+
+
+
+  /////////////
 }

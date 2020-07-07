@@ -50,6 +50,16 @@ export class AppComponent {
   ];
 
 
+  escolaDiscipulosPages = [
+    {
+      title: 'Escola de Discípulos',
+      url: 'escola-de-discipulos',
+      icon: 'school'
+    }
+
+  ];
+
+
 
   constructor(
     private platform: Platform,

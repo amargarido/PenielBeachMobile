@@ -49,6 +49,10 @@ const routes: Routes = [
     path: 'culto-ao-vivo',
     loadChildren: () => import('./pages/culto-ao-vivo/culto-ao-vivo.module').then( m => m.CultoAoVivoPageModule)
   },
+  {
+    path: 'escola-de-discipulos',
+    loadChildren: () => import('./pages/escola-de-discipulos/escola-de-discipulos.module').then( m => m.EscolaDeDiscipulosPageModule)
+  },
 ];
 
 @NgModule({

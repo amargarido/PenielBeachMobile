@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Escola de Discípulos</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content padding> 
+  
+  <ion-card *ngIf="discipulo">
+    <ion-card-header>
+      <ion-card-title [innerHTML]="discipulo.title.rendered"></ion-card-title>
+      <ion-card-subtitle>{{ discipulo.date_gmt |date: 'dd MMM yyy' }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- <img [src]="discipulo.user_avatar.thumb"> -->
+      
+      <div [innerHTML]="discipulo.i9page_meta_fields.i9_app_escola_discipulo_url"></div>
+      </ion-card-content>
+  </ion-card>
+  
+  
+  <!-- <ion-infinite-scroll threshold="300px" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingText="Carregando mais...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+
+</ion-content>
