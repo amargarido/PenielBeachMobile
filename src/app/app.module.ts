@@ -15,6 +15,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WordpressService } from './services/wordpress.service';
 import { JwtInterceptor } from './interceptors/JwtInterceptor';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +36,7 @@ import { JwtInterceptor } from './interceptors/JwtInterceptor';
     AuthGuardService,
     AuthenticationService,
     WordpressService,
+    YoutubeVideoPlayer,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }    
   ],
