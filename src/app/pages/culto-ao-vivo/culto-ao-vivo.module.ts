@@ -8,12 +8,16 @@ import { CultoAoVivoPageRoutingModule } from './culto-ao-vivo-routing.module';
 
 import { CultoAoVivoPage } from './culto-ao-vivo.page';
 
+
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CultoAoVivoPageRoutingModule
+    CultoAoVivoPageRoutingModule,
+    HttpClientModule
   ],
   declarations: [CultoAoVivoPage]
 })
