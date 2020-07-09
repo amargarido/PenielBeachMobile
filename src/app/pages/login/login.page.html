@@ -35,11 +35,11 @@
   <ng-template #welcome>
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Olá {{ ( user.user_display_name | async)}}</ion-card-title>
+        <ion-card-title>Olá </ion-card-title>
       </ion-card-header>
       <ion-card-content>
         {{ ( user | async) | json }}
-        <ion-button expand="full" (click)="logout()">Logout</ion-button>
+        
       </ion-card-content>
     </ion-card>
   </ng-template>

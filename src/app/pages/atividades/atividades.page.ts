@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { WordpressService} from '../../services/wordpress.service';
 import { AuthenticationService } from '../../services/authentication.service';
 
+import { Platform } from '@ionic/angular';
+
 @Component({
   selector: 'app-atividades',
   templateUrl: './atividades.page.html',
@@ -21,9 +23,28 @@ export class AtividadesPage implements OnInit {
 
   constructor(
     private wp: WordpressService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private platform: Platform
   )
   { 
+
+
+
+    if (this.platform.is('hybrid')) {
+
+      console.log('Platform: hybrid');
+    } else if (this.platform.is('android')) {
+      console.log('Platform: android');
+    } else if (this.platform.is('capacitor')) {
+      console.log('Platform: capacitor');
+    } else if (this.platform.is('pwa')) {
+      console.log('Platform: pwa');
+    } else {
+      console.log('Platform?:'+ this.platform.platforms());
+    }
+
+
+
     this.user.subscribe(user => {
       if (user) {
         this.loadAtividadesPosts();
