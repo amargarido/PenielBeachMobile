@@ -16,6 +16,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WordpressService } from './services/wordpress.service';
 import { JwtInterceptor } from './interceptors/JwtInterceptor';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +27,7 @@ import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
     IonicModule.forRoot(), 
     AppRoutingModule, 
     IonicStorageModule.forRoot(), 
-    HttpClientModule,
+    HttpClientModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     // ServiceWorkerModule.register('ngsw-worker.js', {
     //   enabled: environment.production
     // })
