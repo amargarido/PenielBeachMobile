@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Login PWA04</ion-title>
+    <ion-title>Login</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -17,13 +17,15 @@
           <ion-input formControlName="username"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Email</ion-label>
-          <ion-input formControlName="email"></ion-input>
-        </ion-item>
-        <ion-item>
           <ion-label position="floating">Senha</ion-label>
           <ion-input type="password" formControlName="password"></ion-input>
         </ion-item>
+
+        <!-- <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email"></ion-input>
+        </ion-item> -->
+
 
         <ion-button expand="full" [disabled]="!userForm.valid" type="submit">Sign in</ion-button>
         
@@ -44,9 +46,4 @@
     </ion-card>
   </ng-template>
 
-
 </ion-content>
-
-
-<!-- alberto TODO -->
-<a [routerLink]="['/atividades']">TRY Go to atividadesX</a>

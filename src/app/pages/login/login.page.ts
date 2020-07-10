@@ -12,8 +12,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class LoginPage implements OnInit {
 
   userForm: FormGroup;
-  user = this.authService.getCurrentUser();
-// NO  posts = [];
+//  user = this.authService.getCurrentUser();
+
 
   constructor(
     private authService: AuthenticationService,
@@ -21,22 +21,7 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController) 
-    { 
-  /*    this.user.subscribe(user => {
-        if (user) {
-          this.loadPrivatePosts();
-        } else {
-          this.posts = [];
-        }
-      });
-
-      loadPrivatePosts() {
-        this.api.getPrivatePosts().subscribe(res => {
-          this.posts = res;
-        });
-      }
-*/    
-  }
+    { }
 
 
 
@@ -46,8 +31,8 @@ export class LoginPage implements OnInit {
 
     this.userForm = this.fb.group({
       username: ['', Validators.required],
-      email: '',
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      email: ''
     });
   }
   
@@ -56,20 +41,16 @@ export class LoginPage implements OnInit {
 
     this.menu.enable(true);
 
-    // OK  this.authService.doLogin()
-    //   .subscribe(resp => {
-    //     this.authService.registerLogin(resp); 
-    //   });
 
     this.authService.doLogin(
         this.userForm.value.username, 
         this.userForm.value.password)
       .subscribe(
-      resp => {
+      (resp) => {
 
         this.authService.registerLogin(resp); 
       },
-      err => {
+      (err) => {
         this.showError(err);
       }
     );
