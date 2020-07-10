@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Plugin URI: http://meta.eti.br
  * Description: i9 REST
  * Author: Alberto Margarido
- * Version: 1.0.1
+ * Version: 1.2.0
  * License: LGPL version 2.1
  * Network: True
  */
@@ -39,7 +39,7 @@ add_filter( 'rest_authentication_errors', function( $result ) {
 );
 
 
-class i9CLASScreate_api_pages_meta_field {
+class i9_rest_class_controller {
 
     public function __construct() {
         // $this->namespace     = '/my-namespace/v1';
@@ -69,13 +69,14 @@ class i9CLASScreate_api_pages_meta_field {
 } //class
 
 
-function i9_inictialize_api(){
-    $controller = new i9CLASScreate_api_pages_meta_field();
+function i9_initialize_controller(){
+    
+    $controller = new i9_rest_class_controller();
     $controller->i9create_api_pages_meta_field();
 
 }
 
-add_action( 'rest_api_init', 'i9_inictialize_api' );
+add_action( 'rest_api_init', 'i9_initialize_controller' );
 
 
 /*  OK
