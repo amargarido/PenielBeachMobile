@@ -2,11 +2,11 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
- * Plugin Name: i9 REST (Usado somente pelo APP Mobile)
+ * Plugin Name: i9 REST Controller 
  * Plugin URI: http://meta.eti.br
  * Description: i9 REST
  * Author: Alberto Margarido
- * Version: 1.0.0
+ * Version: 1.0.1
  * License: LGPL version 2.1
  * Network: True
  */
@@ -39,30 +39,43 @@ add_filter( 'rest_authentication_errors', function( $result ) {
 );
 
 
-add_action( 'rest_api_init', 'i9create_api_pages_meta_field' );
+class i9CLASScreate_api_pages_meta_field {
 
-function i9create_api_pages_meta_field() {
+    public function __construct() {
+        // $this->namespace     = '/my-namespace/v1';
+        // $this->resource_name = 'posts';
+    }
 
-    // register_rest_field ( 'name-of-post-type', 'name-of-field-to-return', array-of-callbacks-and-schema() )
-    register_rest_field( 'page', 'i9page_meta_fields', 
-        array(
-            'get_callback' => 'i9get_page_meta_for_api',
-            'schema' => null,
-        )
-    );
+    public function i9create_api_pages_meta_field() {
+
+        // register_rest_field ( 'name-of-post-type', 'name-of-field-to-return', array-of-callbacks-and-schema() )
+        register_rest_field( 'page', 'i9page_meta_fields', 
+            array(
+                'get_callback' => array( $this, 'i9get_page_meta_for_api'), 
+                'schema' => null,
+            )
+        );
+
+    }
+
+    public function i9get_page_meta_for_api( $object ) {
+        //get the id of the post object array
+        $post_id = $object['id'];
+
+        //return the page meta
+        return get_post_meta( $post_id );
+    }
+
+} //class
+
+
+function i9_inictialize_api(){
+    $controller = new i9CLASScreate_api_pages_meta_field();
+    $controller->i9create_api_pages_meta_field();
 
 }
 
-function i9get_page_meta_for_api( $object ) {
-    //get the id of the post object array
-    $post_id = $object['id'];
-
-    //return the page meta
-    return get_post_meta( $post_id );
-}
-
-
-
+add_action( 'rest_api_init', 'i9_inictialize_api' );
 
 
 /*  OK
