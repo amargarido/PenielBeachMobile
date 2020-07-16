@@ -49,7 +49,7 @@ export class WordpressService {
       }
     };
 
-    return this.http.get<any[]>(GlobalConstants.siteApiURL + '/buddypress/v1/activity?_embed', options).pipe(
+    return this.http.get<any[]>(GlobalConstants.siteApiURL + '/buddypress/v1/activity?_embed&user_id=2', options).pipe(
       map(resp => {
 
         this.pagesLandings = resp['headers'].get('x-wp-totalpages');
