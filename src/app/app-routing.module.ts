@@ -29,7 +29,6 @@ const routes: Routes = [
   {
     path: 'atividades',
     loadChildren: () => import('./pages/atividades/atividades.module').then( m => m.AtividadesPageModule)
-    ,canActivate: [AuthGuardService]
   },
   {
     path: 'pedidos-oracao',
@@ -52,6 +51,11 @@ const routes: Routes = [
   {
     path: 'escola-de-discipulos',
     loadChildren: () => import('./pages/escola-de-discipulos/escola-de-discipulos.module').then( m => m.EscolaDeDiscipulosPageModule)
+  },
+  {
+    path: 'land-page',
+    loadChildren: () => import('./pages/land-page/land-page.module').then( m => m.LandPagePageModule)
+    ,canActivate: [AuthGuardService]
   },
 ];
 

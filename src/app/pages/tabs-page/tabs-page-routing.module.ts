@@ -11,6 +11,10 @@ const routes: Routes = [
     component: TabsPagePage,
     children: [
       {
+        path: 'land-page',
+        loadChildren: () => import('../land-page/land-page.module').then( m => m.LandPagePageModule)
+      },
+      {
         path: 'pedidosoracao',
         loadChildren: () => import('../pedidos-oracao/pedidos-oracao.module').then(m => m.PedidosOracaoPageModule)
       },
@@ -25,14 +29,14 @@ const routes: Routes = [
 
       {
         path: '',
-        redirectTo: '/app/tabs/atividades',
+        redirectTo: '/app/tabs/land-page',
         pathMatch: 'full'        
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/app/tabs/atividades',
+    redirectTo: '/app/tabs/land-page',
     pathMatch: 'full'
     ,    canActivate: [AuthGuardService]
   }

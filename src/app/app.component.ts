@@ -22,6 +22,12 @@ export class AppComponent {
 
   muralPages = [
     {
+      title: 'Land Page',
+      url: '/app/tabs/land-page',
+      icon: 'home'
+    },
+
+    {
       title: 'Pedido Oração',
       url: '/app/tabs/pedidosoracao',
       icon: 'person-circle'

@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Landing Total {{ count }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content padding> 
+  
+  <ion-card *ngFor="let dataland of datalandings">
+    <ion-card-header>
+      <ion-card-title [innerHTML]="dataland.title.rendered"></ion-card-title>
+      <ion-card-subtitle>{{ dataland.date_gmt |date: 'dd MMM yyy' }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <img [src]="dataland.user_avatar.thumb">
+      <div [innerHTML]="dataland.title"></div>
+      <div [innerHTML]="dataland.content.rendered"></div>
+      <!-- <ion-button expand="full" fill="clear" [routerLink]="['/', 'posts', post.id]">Leia Mais</ion-button> -->
+    </ion-card-content>
+  </ion-card>
+  
+  
+  <ion-infinite-scroll threshold="300px" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingText="Carregando mais...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

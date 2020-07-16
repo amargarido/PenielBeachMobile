@@ -15,6 +15,10 @@ export class WordpressService {
   totalAtividades = null;
   pagesAtividades: any;
 
+  totalLandings = null;
+  pagesLandings: any;
+
+
   constructor(private http: HttpClient) { }
 
 
@@ -32,6 +36,48 @@ export class WordpressService {
   //     })
   //   );
   // }
+
+
+
+  getLandingPages(page = 1): Observable<any[]> {
+
+    let options = {
+      observe: "response" as "body",
+      params: {
+        per_page: '10',
+        page: '' + page
+      }
+    };
+
+    return this.http.get<any[]>(GlobalConstants.siteApiURL + '/buddypress/v1/activity?_embed', options).pipe(
+      map(resp => {
+
+        this.pagesLandings = resp['headers'].get('x-wp-totalpages');
+        this.totalLandings = resp['headers'].get('x-wp-total');
+
+        let data = resp['body'];
+
+        for (let atividade of data) {
+
+          // console.log('atividade:');
+          // console.log(atividade);
+          // trata imagem
+
+          try {
+            atividade.media_url = atividade['_embedded'];//['wp:featuredmedia'][0]['media_details'].sizes['thumbnail'].source_url;
+
+            // console.log('Lendo _embedded:');
+            // console.log(atividade.media_url);
+          } catch (error) {
+            console.log('wordpress.service|getAtividades.error:');
+            console.log(error);
+          }
+
+        }
+        return data;
+      })
+    );
+  }
 
 
 
