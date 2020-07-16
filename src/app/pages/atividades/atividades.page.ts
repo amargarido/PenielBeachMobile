@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { WordpressService} from '../../services/wordpress.service';
 import { AuthenticationService } from '../../services/authentication.service';
 
-
-
 @Component({
   selector: 'app-atividades',
   templateUrl: './atividades.page.html',
