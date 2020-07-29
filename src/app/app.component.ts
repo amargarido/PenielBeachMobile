@@ -7,7 +7,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
 import { Storage } from '@ionic/storage';
-//import { SwUpdate } from '@angular/service-worker';
 
 
 @Component({

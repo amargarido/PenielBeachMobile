@@ -13,7 +13,48 @@ import { Platform } from '@ionic/angular';
 })
 export class LandPagePage implements OnInit {
 
-  datalandings = [];
+
+  
+  categories = [
+
+    { name: 'Um',       slug: 'business'},
+    { name: 'Dois',     slug: 'cloud'},
+    { name: 'Tres',     slug: 'calendar'},
+    { name: 'Quatro',   slug: 'flame'},
+    { name: 'Cinco',    slug: 'bonfire'},
+    { name: 'Seis',     slug: 'eye-off'},
+    { name: 'Sete',     slug: 'fitness'},
+    { name: 'Oito',     slug: 'heart-circle'},
+    { name: 'Nove',     slug: 'location'},
+    { name: 'Dez',      slug: 'mail'},
+    { name: 'Onze',     slug: 'mail-open'},  
+    { name: 'Doze',     slug: 'mail-unread'},
+    { name: 'Treze',    slug: 'navigate'},
+    { name: 'Quatorze', slug: 'person'}, 
+    { name: 'Quinze',   slug: 'newspaper'},
+    { name: 'Dezesseis', slug: 'receipt'},
+    { name: "Célula",   slug:"person-circle"}
+
+];
+
+
+
+/*
+
+Perfil <ion-icon name="person-circle-sharp"></ion-icon>
+Reserva <ion-icon name="pricetags-sharp"></ion-icon>
+Embaixada > <ion-icon name="school-sharp"></ion-icon>
+Aconselhamento> <ion-icon name="chatbubbles-sharp"></ion-icon>
+Insta > <ion-icon name="logo-instagram"></ion-icon>
+Twitter> <ion-icon name="logo-twitter"></ion-icon>
+Facebook > <ion-icon name="logo-facebook"></ion-icon>
+Whats > <ion-icon name="logo-whatsapp"></ion-icon>
+<ion-icon name="logo-whatsapp"></ion-icon>
+<ion-icon name="logo-youtube"></ion-icon>
+
+*/
+
+
   page = 1;
   count = null;
 
@@ -48,9 +89,7 @@ export class LandPagePage implements OnInit {
 
     this.user.subscribe(user => {
       if (user) {
-        this.loadLandingPagePosts();
-      } else {
-        this.datalandings = [];
+        } else {
       }
     });
   }
@@ -59,33 +98,11 @@ export class LandPagePage implements OnInit {
 
   }
 
-  loadLandingPagePosts() {
+  ionViewDidLoad(){}
 
-    this.wp.getLandingPages().subscribe(response =>{
-      this.count = this.wp.totalLandings;
-      this.datalandings = response;
 
-    })
 
-  }
-
-  async loadMore(event){
-
-    this.page++;
-
-    this.wp.getLandingPages(this.page).subscribe(res =>{
-      
-      this.datalandings = [...this.datalandings, ...res];
-
-      event.target.complete();
   
-      if( this.page == this.wp.pagesLandings ){
-
-        event.target.disabled = true;
-      }
-
-    })
-  }
 
 }
 

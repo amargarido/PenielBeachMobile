@@ -11,6 +11,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginPage implements OnInit {
 
+
+  user: any; // TODO  nao usado! retirar.
   userForm: FormGroup;
 //  user = this.authService.getCurrentUser();
 

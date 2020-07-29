@@ -5,11 +5,7 @@
   <meta charset="utf-8"/>
   <title>Peniel Beach</title>
 
-  <base href="/" /> 
-
-  <!--
   <base href="/mobile/"/> 
-  -->
   
 
   <meta name="color-scheme" content="light dark"/>
