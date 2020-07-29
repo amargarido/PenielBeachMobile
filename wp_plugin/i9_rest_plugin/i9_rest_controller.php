@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 
 /*
-* 0.0.1  - criaÃ§Ã£o - https://developer.wordpress.org/rest-api/extending-the-rest-api/controller-classes/
+* 0.0.1  - Criação - https://developer.wordpress.org/rest-api/extending-the-rest-api/controller-classes/
 */
 
 

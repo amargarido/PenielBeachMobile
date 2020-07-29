@@ -27,18 +27,18 @@
     <ion-row>
       <ion-col sizeLg="4" sizeMd="4" sizeXs="6" *ngFor="let category of categories">
         <!-- (click)="goToCategoryShowPage(category.term_id, category.name, category.slug)"> -->
-        <div class="img-wrapper">
+        
 
           <ion-item>
             <ion-label>
               {{category.name}}
             </ion-label>
-            <ion-icon name="{{category.slug}}" slot="end"></ion-icon>
+            <ion-icon  name="{{category.slug}}" slot="start"></ion-icon>
           </ion-item>
 
 
 
-        </div>
+        
       </ion-col>
     </ion-row>
   </ion-grid>

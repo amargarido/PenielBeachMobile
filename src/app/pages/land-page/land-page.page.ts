@@ -39,20 +39,6 @@ export class LandPagePage implements OnInit {
 
 
 
-/*
-
-Perfil <ion-icon name="person-circle-sharp"></ion-icon>
-Reserva <ion-icon name="pricetags-sharp"></ion-icon>
-Embaixada > <ion-icon name="school-sharp"></ion-icon>
-Aconselhamento> <ion-icon name="chatbubbles-sharp"></ion-icon>
-Insta > <ion-icon name="logo-instagram"></ion-icon>
-Twitter> <ion-icon name="logo-twitter"></ion-icon>
-Facebook > <ion-icon name="logo-facebook"></ion-icon>
-Whats > <ion-icon name="logo-whatsapp"></ion-icon>
-<ion-icon name="logo-whatsapp"></ion-icon>
-<ion-icon name="logo-youtube"></ion-icon>
-
-*/
 
 
   page = 1;
