@@ -7,6 +7,8 @@ import { ToastController } from '@ionic/angular';
 import { GlobalConstants } from 'src/app/common/global-constants';
 
 
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 //import 'rxjs/add/operator/map';
 import xml2js from 'xml2js';
 
@@ -36,7 +38,8 @@ export class VideosPage implements OnInit {
   constructor(
     //    private youtube: YoutubeVideoPlayer,
     public http: HttpClient,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    private _sanitizer: DomSanitizer
     
   ) { }
 
@@ -57,7 +60,7 @@ export class VideosPage implements OnInit {
 
   loadXML()
   {
-     this.http.get('/assets/data/youtube.xml', 
+     this.http.get(GlobalConstants.canalYoutubeXML, 
      {
        headers: new HttpHeaders()
        .set('Content-Type', 'text/xml') 
@@ -81,8 +84,7 @@ export class VideosPage implements OnInit {
   {
      return new Promise(resolve =>
      {
-        let // k,
-            arr    = [],
+        let arr    = [],
             parser = new xml2js.Parser(
             {
                trim: true,
@@ -92,16 +94,34 @@ export class VideosPage implements OnInit {
         parser.parseString(data, function (err, result) 
         {
 
-          console.dir( result);
+          // console.dir( result);
            let obj = result.feed; //root xml
            for(let k in obj.entry) // entry -> nós com os dados dos vídeos
            {
               let item = obj.entry[k];
+              
+
+
+              console.dir( "item::");
+              console.dir( item );
+
+
+              console.dir( "item['media:group']::");
+              console.dir( item['media:group']);
+
+              let mediagroup:[] = item['media:group'];
+
+
+              console.dir( "mediagroup[0]::");
+              console.dir( mediagroup['medi']);
+              
+              
               arr.push({  
-                 id           : item.id[0],
-                 title        : item.title[0],
-                 videoID : item['yt:videoId'],
-                //  genre        : item.genre[0]
+                 id           : item.id,
+                 title        : item['title'],
+                 videoID      : item['yt:videoId'],
+                 thumbnail    : "https://i1.ytimg.com/vi/"+item['yt:videoId']+"/hqdefault.jpg"
+                 
               });
            }
             
@@ -116,38 +136,9 @@ export class VideosPage implements OnInit {
 ionViewDidEnter(){
 
   this.loadXML();
-  // OK this.fetchContent();
+
 }
 
-fetchContent(): void {
-  // let loading = this.loadingCtrl.create({
-  //   content: 'Buscando vÃ­deos...'
-  // });
-
-  //    loading.present();
-
-  this.http.get(GlobalConstants.canalYoutubeURL)
-    .subscribe((data: any) => {
-
-      console.log('videos page data:');
-      console.log(data);
-
-      // console.log('videos page data.items:');
-      // console.log(data['items']);
-
-      // this.feeds = data['items'];
-
-      //        loading.dismiss();
-    },
-      (err: any) => {
-
-        console.log('ERRO videos page:');
-        console.log(err);
-        // loading.dismiss(); 
-        // this.mostraFaltaConexao(); 
-        // this.connServ.setInnerTimerVideos( 0 );//refresh immediately);}
-      });
-} // fetchContent()
 
 itemSelected(event: any, feed: any) {
   let oVideo: string;
