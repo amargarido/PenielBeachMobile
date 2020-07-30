@@ -13,32 +13,34 @@ import { Platform } from '@ionic/angular';
 })
 export class LandPagePage implements OnInit {
 
-
   
   categories = [
 
-    { name: 'Um',       slug: 'business'},
-    { name: 'Dois',     slug: 'cloud'},
-    { name: 'Tres',     slug: 'calendar'},
-    { name: 'Quatro',   slug: 'flame'},
-    { name: 'Cinco',    slug: 'bonfire'},
-    { name: 'Seis',     slug: 'eye-off'},
-    { name: 'Sete',     slug: 'fitness'},
-    { name: 'Oito',     slug: 'heart-circle'},
-    { name: 'Nove',     slug: 'location'},
-    { name: 'Dez',      slug: 'mail'},
-    { name: 'Onze',     slug: 'mail-open'},  
-    { name: 'Doze',     slug: 'mail-unread'},
-    { name: 'Treze',    slug: 'navigate'},
-    { name: 'Quatorze', slug: 'person'}, 
-    { name: 'Quinze',   slug: 'newspaper'},
-    { name: 'Dezesseis', slug: 'receipt'},
-    { name: "Célula",   slug:"person-circle"}
+    { name: 'Igreja',             slug: 'business'},
+    { name: 'Menu',               slug: 'speedometer'},
+    { name: 'Célula',             slug: 'people'},
+    { name: 'Perfil',             slug: 'person'},
+    { name: 'Configuração',       slug: 'settings'},
+    { name: 'Reserva',            slug: 'pricetags'},
 
+    { name: 'Mensagem recebida',  slug: 'mail'},
+    { name: 'Mensagem aberta',    slug: 'mail-open'},  
+    { name: 'Enviando mensagem',  slug: 'mail-unread'},
+
+    { name: 'Embaixada',          slug: 'school'},
+    { name: 'Aconselhamento',     slug: 'chatbubbles'},
+    { name: 'Business beach',     slug: 'pricetags'},
+    
+    { name: 'Peniel TV',          slug: 'tablet-portrait'},
+    { name: 'Pesquisa',           slug: 'search-circle'}, 
+    { name: 'Notícias',           slug: 'newspaper'},
+
+    { name: 'Instagram',          slug: 'logo-instagram'},
+    { name: 'Twitter',            slug: 'logo-twitter'},
+    { name: 'Facebook',           slug: 'logo-facebook'},
+    { name: 'WhatsApp',           slug: 'logo-whatsapp'},
+    { name: 'Youtube',            slug: 'logo-youtube'}
 ];
-
-
-
 
 
   page = 1;
