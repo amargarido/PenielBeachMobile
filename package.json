@@ -30,7 +30,10 @@
     "@ionic/storage": "^2.2.0",
     "cordova-plugin-youtube-video-player": "^2.4.0",
     "rxjs": "~6.5.1",
+    "streams": "^0.1.0",
+    "timers": "^0.1.1",
     "tslib": "^1.10.0",
+    "xml2js": "^0.4.23",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

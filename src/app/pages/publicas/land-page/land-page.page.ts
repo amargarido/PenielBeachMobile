@@ -18,7 +18,8 @@ export class LandPagePage implements OnInit {
   
   categories = [
 
-    { name: 'Igreja',             slug: 'business', navega:'videos'},
+    { name: 'Youtube',            slug: 'logo-youtube', navega:'videos'},
+    { name: 'Igreja',             slug: 'business'},
     { name: 'Menu',               slug: 'speedometer'},
     { name: 'Célula',             slug: 'people'},
     { name: 'Perfil',             slug: 'person'},
@@ -41,7 +42,7 @@ export class LandPagePage implements OnInit {
     { name: 'Twitter',            slug: 'logo-twitter'},
     { name: 'Facebook',           slug: 'logo-facebook'},
     { name: 'WhatsApp',           slug: 'logo-whatsapp'},
-    { name: 'Youtube',            slug: 'logo-youtube'}
+    
 ];
 
 

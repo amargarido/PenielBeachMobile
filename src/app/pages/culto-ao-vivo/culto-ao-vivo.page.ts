@@ -52,7 +52,7 @@ export class CultoAoVivoPage implements OnInit {
 
 //    loading.present();
 
-    this.http.get(GlobalConstants.cultoAoVivoURL)
+    this.http.get("GlobalConstants.cultoAoVivoURL")
         .subscribe((data: any) => {
 
           // console.log('Culto ao vivo data:');
