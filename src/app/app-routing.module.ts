@@ -33,12 +33,12 @@ const routes: Routes = [
   {
     path: 'pedidos-oracao',
     loadChildren: () => import('./pages/pedidos-oracao/pedidos-oracao.module').then( m => m.PedidosOracaoPageModule)
-    ,canActivate: [AuthGuardService]
+    //,canActivate: [AuthGuardService]
   },
   {
     path: 'comunidade',
     loadChildren: () => import('./pages/comunidade/comunidade.module').then( m => m.ComunidadePageModule)
-    ,canActivate: [AuthGuardService]
+    //,canActivate: [AuthGuardService]
   },
   {
     path: 'logout',
@@ -54,8 +54,12 @@ const routes: Routes = [
   },
   {
     path: 'land-page',
-    loadChildren: () => import('./pages/land-page/land-page.module').then( m => m.LandPagePageModule)
-    ,canActivate: [AuthGuardService]
+    loadChildren: () => import('./pages/publicas/land-page/land-page.module').then( m => m.LandPagePageModule)
+    //,canActivate: [AuthGuardService]
+  },
+  {
+    path: 'videos',
+    loadChildren: () => import('./pages/publicas/videos/videos.module').then( m => m.VideosPageModule)
   },
 ];
 

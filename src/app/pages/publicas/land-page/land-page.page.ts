@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { WordpressService} from '../../services/wordpress.service';
-import { AuthenticationService } from '../../services/authentication.service';
+import { WordpressService} from '../../../services/wordpress.service';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 import { Platform } from '@ionic/angular';
+
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +18,7 @@ export class LandPagePage implements OnInit {
   
   categories = [
 
-    { name: 'Igreja',             slug: 'business'},
+    { name: 'Igreja',             slug: 'business', navega:'videos'},
     { name: 'Menu',               slug: 'speedometer'},
     { name: 'Célula',             slug: 'people'},
     { name: 'Perfil',             slug: 'person'},
@@ -54,7 +56,8 @@ export class LandPagePage implements OnInit {
   constructor(
     private wp: WordpressService,
     private authService: AuthenticationService,
-    private platform: Platform
+    private platform: Platform,
+    private router: Router
   )
   { 
 
@@ -87,6 +90,15 @@ export class LandPagePage implements OnInit {
   }
 
   ionViewDidLoad(){}
+
+  goNavegacao(navega: String, name:String, slug: String){
+
+    console.log('navega:');
+    console.log(navega);
+
+    this.router.navigate([navega]);
+
+  }
 
 
 

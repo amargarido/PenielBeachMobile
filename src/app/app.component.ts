@@ -113,10 +113,9 @@ export class AppComponent {
     });
   }
 
-  checkLoginStatus() {
-    return this.authService.isLoggedIn().then(loggedIn => {
-      return this.updateLoggedInStatus(loggedIn);
-    });
+  async checkLoginStatus() {
+    const loggedIn = await this.authService.isLoggedIn();
+    return this.updateLoggedInStatus(loggedIn);
   }
 
   updateLoggedInStatus(loggedIn: boolean) {
@@ -129,7 +128,8 @@ export class AppComponent {
         this.router.navigate(['/app'])
 
       } else {
-        this.router.navigate(['login'])
+        // this.router.navigate(['login'])
+        this.router.navigate(['land-page'])
 
       }
 
@@ -154,7 +154,8 @@ export class AppComponent {
 
   logout() {
     this.authService.logout().then(() => {
-      return this.router.navigate(['login']);
+      // return this.router.navigate(['login']);
+      return this.router.navigate(['land-page']);
     });
   }
 

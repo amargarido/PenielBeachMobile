@@ -12,7 +12,7 @@ const routes: Routes = [
     children: [
       {
         path: 'land-page',
-        loadChildren: () => import('../land-page/land-page.module').then( m => m.LandPagePageModule)
+        loadChildren: () => import('../publicas/land-page/land-page.module').then( m => m.LandPagePageModule)
       },
       {
         path: 'pedidosoracao',
