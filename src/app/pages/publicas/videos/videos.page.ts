@@ -57,7 +57,7 @@ export class VideosPage implements OnInit {
 
   loadXML()
   {
-     this.http.get('/assets/data/data.xml', 
+     this.http.get('/assets/data/youtube.xml', 
      {
        headers: new HttpHeaders()
        .set('Content-Type', 'text/xml') 
@@ -77,11 +77,11 @@ export class VideosPage implements OnInit {
   }
 
 
-  parseXML(data)
+  parseXML(data: string)
   {
      return new Promise(resolve =>
      {
-        var k,
+        let // k,
             arr    = [],
             parser = new xml2js.Parser(
             {
@@ -91,15 +91,17 @@ export class VideosPage implements OnInit {
 
         parser.parseString(data, function (err, result) 
         {
-           var obj = result.comics;
-           for(k in obj.publication)
+
+          console.dir( result);
+           let obj = result.feed; //root xml
+           for(let k in obj.entry) // entry -> nós com os dados dos vídeos
            {
-              var item = obj.publication[k];
+              let item = obj.entry[k];
               arr.push({  
                  id           : item.id[0],
                  title        : item.title[0],
-                 publisher : item.publisher[0],
-                 genre        : item.genre[0]
+                 videoID : item['yt:videoId'],
+                //  genre        : item.genre[0]
               });
            }
             

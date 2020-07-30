@@ -17,10 +17,9 @@ https://penielbeach.com.br/wp-json/buddypress/v1/activity?_embed&user_id=2
 
 (yes) npm install --save timers
 
-(???) npm install streams
 
-
-(NO ?) npm install --save @types/xml2js
+(NO !  nao usar em conjunto) npm install --save @types/xml2js
+(sem diferenca) npm install --save streams
 
 
 
