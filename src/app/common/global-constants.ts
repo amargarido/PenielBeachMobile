@@ -7,7 +7,9 @@ export class GlobalConstants {
 
     // OK public static canalYoutubeURL: string = "https://www.googleapis.com/youtube/v3/search?channelId=UCexdKUQ25mhIv42KS6nVgLQ&order=date&part=snippet&type=video&maxResults=10&key=AIzaSyAihjQWgnE9RURPK_atUU7QPkwE44qK7nI";
  
-    public static canalYoutubeXML: string ="https://www.youtube.com/feeds/videos.xml?channel_id=UCexdKUQ25mhIv42KS6nVgLQ";
+
+    // TODO apontando para outro site -> i9academy.soccer
+    public static canalYoutubeXML: string ="https://penielbeach.com.br/wp-json/i9/v1/youtube_canal";
 
     
 

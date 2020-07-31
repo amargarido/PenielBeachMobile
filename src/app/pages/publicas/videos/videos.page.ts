@@ -40,11 +40,8 @@ export class VideosPage implements OnInit {
     public http: HttpClient,
     public toastCtrl: ToastController,
     private _sanitizer: DomSanitizer
-    
+
   ) { }
-
-
-  
 
 
   ngOnInit() {
@@ -52,102 +49,127 @@ export class VideosPage implements OnInit {
 
 
 
-  teste() {
-
-    // this.youtube.openVideo('myvideoid');
-  }
 
 
-  loadXML()
-  {
-     this.http.get(GlobalConstants.canalYoutubeXML, 
-     {
-       headers: new HttpHeaders()
-       .set('Content-Type', 'text/xml') 
-       .append('Access-Control-Allow-Methods', 'GET') 
-       .append('Access-Control-Allow-Origin', '*')
-       .append('Access-Control-Allow-Headers', "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method"), 
-       responseType:'text'
-     })
-     .subscribe((data)=>
-     {
+  loadXML() {
+    this.http.get(GlobalConstants.canalYoutubeXML,
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'text/xml')
+          .append('Access-Control-Allow-Methods', 'GET')
+          .append('Access-Control-Allow-Origin', '*')
+          .append('Access-Control-Allow-Headers', "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method"),
+        responseType: 'text'
+      })
+      .subscribe((data) => {
         this.parseXML(data)
-        .then((data)=>
-        {
-           this.xmlItems = data;
-        });
-     });
+          .then((data) => {
+            this.xmlItems = data;
+          });
+      });
   }
 
 
-  parseXML(data: string)
-  {
-     return new Promise(resolve =>
-     {
-        let arr    = [],
-            parser = new xml2js.Parser(
-            {
-               trim: true,
-               explicitArray: true
-            });
+  parseXML(data: string) {
+    return new Promise(resolve => {
+      let arr = [],
+        parser = new xml2js.Parser(
+          {
+            trim: true,
+            explicitArray: true
+          });
 
-        parser.parseString(data, function (err, result) 
+      parser.parseString(data, function (err, result) {
+
+        // console.dir( result);
+        let obj = result.feed; //root xml
+        for (let k in obj.entry) // entry -> nós com os dados dos vídeos
         {
-
-          // console.dir( result);
-           let obj = result.feed; //root xml
-           for(let k in obj.entry) // entry -> nós com os dados dos vídeos
-           {
-              let item = obj.entry[k];
-              
+          let item = obj.entry[k];
 
 
-              console.dir( "item::");
-              console.dir( item );
+
+          // console.dir( "item::");
+          // console.dir( item );
+          // console.dir( "item['media:group']::");
+          // console.dir( item['media:group']);
+          // let mediagroup:[] = item['media:group'];
+          // console.dir( "mediagroup[0]::");
+          // console.dir( mediagroup['medi']);
 
 
-              console.dir( "item['media:group']::");
-              console.dir( item['media:group']);
+          arr.push({
+            id: item.id,
+            title: item['title'],
+            videoID: item['yt:videoId'],
+            thumbnail: "https://i1.ytimg.com/vi/" + item['yt:videoId'] + "/hqdefault.jpg"
 
-              let mediagroup:[] = item['media:group'];
+          });
+        }
 
-
-              console.dir( "mediagroup[0]::");
-              console.dir( mediagroup['medi']);
-              
-              
-              arr.push({  
-                 id           : item.id,
-                 title        : item['title'],
-                 videoID      : item['yt:videoId'],
-                 thumbnail    : "https://i1.ytimg.com/vi/"+item['yt:videoId']+"/hqdefault.jpg"
-                 
-              });
-           }
-            
-           resolve(arr);
-        });
-     });
+        resolve(arr);
+      });
+    });
   }
 
 
 
 
-ionViewDidEnter(){
+  ionViewDidEnter() {
 
-  this.loadXML();
+ //    this.loadXML();
+  this.fetchContent();
 
-}
+  }
 
 
-itemSelected(event: any, feed: any) {
-  let oVideo: string;
-  console.log("feed.id:" + feed.id);
+  itemSelected(event: any, feed: any) {
+    let oVideo: string;
+    console.log("feed.id:" + feed.id);
 
-  oVideo = feed.id;
-  // OK ??? this.youtube.openVideo(oVideo+''); //  hack: must conctenate as a string
+    oVideo = feed.id;
+    // OK ??? this.youtube.openVideo(oVideo+''); //  hack: must conctenate as a string
 
-} // itemSelected()
+  } // itemSelected()
+
+
+  fetchContent(): void {
+    // let loading = this.loadingCtrl.create({
+    //   content: 'Buscando vÃ­deos...'
+    // });
+
+    //    loading.present();
+
+    this.http.get(GlobalConstants.canalYoutubeXML)
+      .subscribe((data: any) => {
+
+        console.log('videos page data:');
+        console.log(data);
+
+
+        console.log('videos page data[entry]:');
+        console.log(data['entry']);
+
+        this.feeds = data['entry'];
+
+        console.log('feeds[0][id]:');
+        console.log( this.feeds[0]['id'] );
+
+        
+
+        //        loading.dismiss();
+      },
+        (err: any) => {
+
+          console.log('ERRO videos page:');
+          console.log(err);
+          // loading.dismiss(); 
+          // this.mostraFaltaConexao(); 
+          // this.connServ.setInnerTimerVideos( 0 );//refresh immediately);}
+        });
+  } // fetchContent()
+
+
 
 
 
