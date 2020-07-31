@@ -143,19 +143,18 @@ export class VideosPage implements OnInit {
     this.http.get(GlobalConstants.canalYoutubeXML)
       .subscribe((data: any) => {
 
-        console.log('videos page data:');
-        console.log(data);
-
-
-        console.log('videos page data[entry]:');
-        console.log(data['entry']);
-
         this.feeds = data['entry'];
 
-        console.log('feeds[0][id]:');
-        console.log( this.feeds[0]['id'] );
+        for(let index in this.feeds){
 
-        
+//        console.log(this.feeds[index]['id']);  // output: Apple Orange Banana 
+        this.feeds[index]['thumbnail'] =  "https://i1.ytimg.com/vi/" + this.feeds[index]['id'].substr(9) + "/hqdefault.jpg";
+         
+
+
+
+        }
+      
 
         //        loading.dismiss();
       },

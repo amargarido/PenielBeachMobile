@@ -10,9 +10,9 @@
 
 <ion-content padding>
  
-  <!-- <ion-item-group>
+  <ion-item-group>
      <ion-item-divider color="light">Youtube</ion-item-divider>
-     <ion-item *ngFor="let item of xmlItems">
+     <ion-item *ngFor="let item of feeds">
       <ion-thumbnail item-left>
         <img [src]='item.thumbnail' width="480" height="360" frameborder="0" allowfullscreen />
      </ion-thumbnail>
@@ -20,16 +20,16 @@
       {{ item.title }}
         
      </ion-item>
-  </ion-item-group> -->
+  </ion-item-group>
 
-  <ion-grid>
+  <!-- <ion-grid>
     <ion-row>
-      <ion-col sizeLg="4" sizeMd="4" sizeXs="6" *ngFor="let category of feeds"
+      <ion-col sizeLg="4" sizeMd="4" sizeXs="6" *ngFor="let category of feeds">
         (click)="goNavegacao(category.navega, category.name, category.slug)">
   
         
           <ion-thumbnail item-left>
-            <img [src]='category.id' width="480" height="360" frameborder="0" allowfullscreen />
+            <img [src]='category.thumbnail' width="480" height="360" frameborder="0" allowfullscreen />
          </ion-thumbnail>
     
           {{ category.title }}
@@ -38,7 +38,7 @@
 
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
 </ion-content>
 
