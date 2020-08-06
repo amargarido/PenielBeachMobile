@@ -23,4 +23,23 @@ https://penielbeach.com.br/wp-json/buddypress/v1/activity?_embed&user_id=2
 
 
 
+## Teste plataforma
+
+     if (this.platform.is('hybrid')) {
+
+       console.log('Platform: hybrid');
+     } else if (this.platform.is('android')) {
+       console.log('Platform: android');
+     } else if (this.platform.is('capacitor')) {
+       console.log('Platform: capacitor');
+     } else if (this.platform.is('pwa')) {
+       console.log('Platform: pwa');
+     } else {
+       console.log('Platform?:'+ this.platform.platforms());
+     }
+
+
+
+
+
 

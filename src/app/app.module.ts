@@ -18,9 +18,10 @@ import { JwtInterceptor } from './interceptors/JwtInterceptor';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SafeHtmlPipe],
   entryComponents: [],
   imports: [
     BrowserModule, 

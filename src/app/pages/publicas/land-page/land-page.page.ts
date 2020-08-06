@@ -19,6 +19,7 @@ export class LandPagePage implements OnInit {
   categories = [
 
     { name: 'Youtube',            slug: 'logo-youtube', navega:'videos'},
+    { name: 'Mural',              slug: 'business',     navega:'mural'},
     { name: 'Igreja',             slug: 'business'},
     { name: 'Menu',               slug: 'speedometer'},
     { name: 'Célula',             slug: 'people'},
@@ -55,29 +56,12 @@ export class LandPagePage implements OnInit {
   
 
   constructor(
-    private wp: WordpressService,
-    private authService: AuthenticationService,
-    private platform: Platform,
-    private router: Router
+    private wp          : WordpressService,
+    private authService : AuthenticationService,
+    private platform    : Platform,
+    private router      : Router
   )
   { 
-
-
-
-    // if (this.platform.is('hybrid')) {
-
-    //   console.log('Platform: hybrid');
-    // } else if (this.platform.is('android')) {
-    //   console.log('Platform: android');
-    // } else if (this.platform.is('capacitor')) {
-    //   console.log('Platform: capacitor');
-    // } else if (this.platform.is('pwa')) {
-    //   console.log('Platform: pwa');
-    // } else {
-    //   console.log('Platform?:'+ this.platform.platforms());
-    // }
-
-
 
     this.user.subscribe(user => {
       if (user) {
@@ -86,9 +70,7 @@ export class LandPagePage implements OnInit {
     });
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   ionViewDidLoad(){}
 
@@ -100,10 +82,6 @@ export class LandPagePage implements OnInit {
     this.router.navigate([navega]);
 
   }
-
-
-
-  
 
 }
 

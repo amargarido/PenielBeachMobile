@@ -165,43 +165,42 @@ export class WordpressService {
 
   }
 
-  //////////////
 
-  getIdPagina(): Promise<any> {
+  getIDPaginaMural(): Promise<any> {
 
-    console.log('Entrei em getIdPagina()');
+    console.log('Entrei em getIDPaginaMural()');
 
     let paginaoptions = {
       observe: "response" as "body",
     };
     return this.http.get<number>(
-      GlobalConstants.siteApiURL + '/wp/v2/pages?slug=escola-de-discipulo', paginaoptions).toPromise();
+      GlobalConstants.siteApiURL + '/wp/v2/pages?slug=mural', paginaoptions).toPromise();
 
   }
 
 
   oretorno: any;
 
-  async getAPagina(): Promise<any> {
+  async getPaginaMural(): Promise<any> {
 
 
 
-    await this.getIdPagina().then(retorno => {
+    await this.getIDPaginaMural().then(retorno => {
 
 
-      console.log('Valor de getIdPagina()  retorno');
+      console.log('Valor de getIDPaginaMural():');
 
       console.log(retorno);
 
       this.oretorno = retorno['body'][0]['id'];
 
-      console.log('Valor de getIdPagina()' + this.oretorno);
+      console.log('Valor de getIDPaginaMural()' + this.oretorno);
     }
     );
 
     let options = {
       observe: "response" as "body",
-      
+
     };
     return this.http.get<any>(GlobalConstants.siteApiURL + '/wp/v2/pages/' + this.oretorno, options).toPromise().then(
       resp => {
@@ -241,6 +240,74 @@ export class WordpressService {
 
 
 
+  //////////////
 
-  /////////////
+  getIdPagina(): Promise<any> {
+
+    console.log('Entrei em getIdPagina()');
+
+    let paginaoptions = {
+      observe: "response" as "body",
+    };
+    return this.http.get<number>(
+      GlobalConstants.siteApiURL + '/wp/v2/pages?slug=escola-de-discipulo', paginaoptions).toPromise();
+
+  }
+
+
+  // oretorno: any;
+
+  async getAPagina(): Promise<any> {
+
+
+
+    await this.getIdPagina().then(retorno => {
+
+
+      console.log('Valor de getIdPagina()  retorno');
+
+      console.log(retorno);
+
+      this.oretorno = retorno['body'][0]['id'];
+
+      console.log('Valor de getIdPagina()' + this.oretorno);
+    }
+    );
+
+    let options = {
+      observe: "response" as "body",
+
+    };
+    return this.http.get<any>(GlobalConstants.siteApiURL + '/wp/v2/pages/' + this.oretorno, options).toPromise().then(
+      resp => {
+
+        // console.log('getAPagina... resp:');
+        // console.log(resp);
+
+        let data = resp['body'];
+
+        // console.log('getAPagina... data(body):');
+        // console.log(data);
+
+        // try {
+        //   console.log('data[i9page_meta_fields]');
+        //   console.log(data['i9page_meta_fields']);
+
+
+        //   try {
+        //     console.log('data[i9page_meta_fields][i9_app_escola_discipulo_url]');
+        //     console.log(data['i9page_meta_fields']['i9_app_escola_discipulo_url']);
+        //   } catch (error) {
+        //     console.log(error);
+        //   }
+
+
+        // } catch (error) {
+        //   console.log(error);
+        // }
+
+        return data;
+      }
+    );
+  }
 }

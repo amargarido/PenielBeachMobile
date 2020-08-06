@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
 
     this.userForm = this.fb.group({
       username: ['manobeto', Validators.required],
-      password: ['Mano123tadominado', Validators.required],
+      password: ['Cloud9Mano123', Validators.required],
       email: ''
     });
   }

@@ -61,6 +61,10 @@ const routes: Routes = [
     path: 'videos',
     loadChildren: () => import('./pages/publicas/videos/videos.module').then( m => m.VideosPageModule)
   },
+  {
+    path: 'mural',
+    loadChildren: () => import('./pages/publicas/mural/mural.module').then( m => m.MuralPageModule)
+  },
 ];
 
 @NgModule({
