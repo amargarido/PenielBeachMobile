@@ -12,7 +12,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
 export class MuralPage implements OnInit {
 
   public mural: any = null;
-  public anexos: any[] = null;
+  public dados: { nome: string; valor: any; }[];
 
   count = null;
   idPaginaMural: number;
@@ -45,27 +45,28 @@ export class MuralPage implements OnInit {
     
   }
 
-  dados: { nome: string; valor: any; }[];
+  
 
-  buttonClick(){
+async populaDados(osDados){
 
-    console.log("buttonClick()...");
+    console.log("populaDados() this mural...");
+    console.log(osDados)
 
-    console.log("this mural ...");
-    console.log(this.mural)
-
+    this.dados = [];
     
-      for (let element in this.mural.i9page_meta_fields) {
+    // mural.i9page_meta_fields._oembed_8c10d07cfebdf1d1063f72a7eb0be799[0]
+      for (let element in osDados.i9page_meta_fields) {
 
 
         
+
         this.dados.push({
           'nome': element,
-          'valor': this.mural.i9page_meta_fields[element][0]
+          'valor': osDados.i9page_meta_fields[element][0]
         });
 
 
-        this.mural['aaa'][element]= this.mural.i9page_meta_fields[element][0];
+        // this.mural['aaa'][element]= osDados.i9page_meta_fields[element][0];
 
       }
 
@@ -95,8 +96,9 @@ export class MuralPage implements OnInit {
       console.log('this.mural :');
       console.log(this.mural);
 
-      setTimeout(() => this.buttonClick(), 2000);
+      // setTimeout(() => this.populaDados(), 2000);
 
+      this.populaDados(this.mural);
 
     });
 

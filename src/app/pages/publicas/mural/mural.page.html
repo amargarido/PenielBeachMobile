@@ -9,7 +9,7 @@
  
 <ion-content padding> 
 
-  <!-- <ion-button (click)="buttonClick()"></ion-button> -->
+  <ion-button (click)="buttonClick()"></ion-button>
   
   <ion-card *ngIf="mural">
     <ion-card-header>
@@ -21,7 +21,24 @@
       
       <div [innerHTML]="mural.i9page_meta_fields._oembed_8c10d07cfebdf1d1063f72a7eb0be799[0]  | safeHtml "></div> 
       </ion-card-content>
+
+
+
   </ion-card>
+
+  <ion-list *ngFor="let item of dados">
+    <ion-card >
+      
+
+
+      <ion-card-content>
+        
+      <div [innerHTML]="item.valor | safeHtml"></div> 
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+
   
 
 <!-- 
