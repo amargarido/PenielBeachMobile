@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { WordpressService } from '../../services/wordpress.service';
 
+
+
+
 @Component({
   selector: 'app-igreja',
   templateUrl: './igreja.page.html',
@@ -9,7 +12,9 @@ import { WordpressService } from '../../services/wordpress.service';
 })
 export class IgrejaPage implements OnInit {
 
-  igreja: any[];
+  
+
+  igreja: any;
 
   constructor(
     private wp: WordpressService
