@@ -10,17 +10,21 @@
 
 <ion-content>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
-    </ion-card-content>
-  </ion-card>
-  
+<ion-card *ngIf="igreja">
+  <ion-card-header>
+    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+    <ion-card-title>{{igreja.name}}</ion-card-title>
+    <ion-thumbnail item-left>
+      <img [src]='igreja.avatar_urls.thumb' width="480" height="360" frameborder="0" allowfullscreen />
+   </ion-thumbnail>
+
+    
+  </ion-card-header>
+
+  <ion-card-content>
+    Keep close to Nature's heart... and break clear away, once in awhile,
+    and climb a mountain or spend a week in the woods. Wash your spirit clean.
+  </ion-card-content>
+</ion-card>
 
 </ion-content>
