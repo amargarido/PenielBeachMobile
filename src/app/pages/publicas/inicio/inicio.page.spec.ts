@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { LandPagePage } from './land-page.page';
+import { LandPagePage } from './inicio.page';
 
 describe('LandPagePage', () => {
   let component: LandPagePage;

@@ -18,28 +18,14 @@ export class WordpressService {
   totalLandings = null;
   pagesLandings: any;
 
+  oretorno: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+    ) { }
+ 
 
-
-
-  // getPrivatePosts() {
-  //   return this.http.get<any[]>(GlobalConstants.siteApiURL +'/wp/v2/posts?_embed&status=private').pipe(
-  //     map(data => {
-  //       for (let post of data) {
-  //         if (post['_embedded']['wp:featuredmedia']) {
-  //           post.media_url =
-  //             post['_embedded']['wp:featuredmedia'][0]['media_details'].sizes['medium'].source_url;
-  //         }
-  //       }
-  //       return data;
-  //     })
-  //   );
-  // }
-
-
-
-  getLandingPages(page = 1): Observable<any[]> {
+  TTTgetLandingPages(page = 1): Observable<any[]> {
 
     let options = {
       observe: "response" as "body",
@@ -166,6 +152,10 @@ export class WordpressService {
   }
 
 
+  /*****
+   * Mural
+   * 
+   */
   getIDPaginaMural(): Promise<any> {
 
     console.log('Entrei em getIDPaginaMural()');
@@ -177,19 +167,13 @@ export class WordpressService {
       GlobalConstants.siteApiURL + '/wp/v2/pages?slug=mural', paginaoptions).toPromise();
 
   }
-
-
-  oretorno: any;
+  
 
   async getPaginaMural(): Promise<any> {
 
-
-
     await this.getIDPaginaMural().then(retorno => {
 
-
       console.log('Valor de getIDPaginaMural():');
-
       console.log(retorno);
 
       this.oretorno = retorno['body'][0]['id'];
@@ -202,40 +186,65 @@ export class WordpressService {
       observe: "response" as "body",
 
     };
-    return this.http.get<any>(GlobalConstants.siteApiURL + '/wp/v2/pages/' + this.oretorno, options).toPromise().then(
+    return this.http.get<any>(GlobalConstants.siteApiURL + '/wp/v2/pages/' + this.oretorno, options).
+      toPromise().then(
       resp => {
 
-        // console.log('getAPagina... resp:');
-        // console.log(resp);
-
         let data = resp['body'];
-
-        // console.log('getAPagina... data(body):');
-        // console.log(data);
-
-        // try {
-        //   console.log('data[i9page_meta_fields]');
-        //   console.log(data['i9page_meta_fields']);
-
-
-        //   try {
-        //     console.log('data[i9page_meta_fields][i9_app_escola_discipulo_url]');
-        //     console.log(data['i9page_meta_fields']['i9_app_escola_discipulo_url']);
-        //   } catch (error) {
-        //     console.log(error);
-        //   }
-
-
-        // } catch (error) {
-        //   console.log(error);
-        // }
 
         return data;
       }
     );
   }
 
+  // Mural
 
+  /**
+   * Igreja
+   * 
+   */
+
+  getIDIgreja(): Promise<any> {
+
+    console.log('Entrei em getIDIgreja()');
+
+    let paginaoptions = {
+      observe: "response" as "body",
+    };
+    return this.http.get<number>(
+      GlobalConstants.siteApiURL + '/buddyboss/v1/members?search=igreja peniel', paginaoptions).toPromise();
+
+  }
+
+
+  async getPaginaIgreja(): Promise<any> {
+
+    await this.getIDIgreja().then(retorno => {
+
+      console.log('Valor de getIDIgreja():');
+      console.log(retorno);
+
+      this.oretorno = retorno['body'][0]['id'];
+
+      console.log('Valor de getIDIgreja()' + this.oretorno);
+    }
+    );
+
+    let options = {
+      observe: "response" as "body",
+
+    };
+    return this.http.get<any>(GlobalConstants.siteApiURL + '/buddyboss/v1/members/' + this.oretorno, options).
+      toPromise().then(
+      resp => {
+
+        let data = resp['body'];
+
+        return data;
+      }
+    );
+  }
+  // Igreja
 
 
 
@@ -259,13 +268,9 @@ export class WordpressService {
 
   async getAPagina(): Promise<any> {
 
-
-
     await this.getIdPagina().then(retorno => {
 
-
       console.log('Valor de getIdPagina()  retorno');
-
       console.log(retorno);
 
       this.oretorno = retorno['body'][0]['id'];
@@ -281,30 +286,7 @@ export class WordpressService {
     return this.http.get<any>(GlobalConstants.siteApiURL + '/wp/v2/pages/' + this.oretorno, options).toPromise().then(
       resp => {
 
-        // console.log('getAPagina... resp:');
-        // console.log(resp);
-
         let data = resp['body'];
-
-        // console.log('getAPagina... data(body):');
-        // console.log(data);
-
-        // try {
-        //   console.log('data[i9page_meta_fields]');
-        //   console.log(data['i9page_meta_fields']);
-
-
-        //   try {
-        //     console.log('data[i9page_meta_fields][i9_app_escola_discipulo_url]');
-        //     console.log(data['i9page_meta_fields']['i9_app_escola_discipulo_url']);
-        //   } catch (error) {
-        //     console.log(error);
-        //   }
-
-
-        // } catch (error) {
-        //   console.log(error);
-        // }
 
         return data;
       }

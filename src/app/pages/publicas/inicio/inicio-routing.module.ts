@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LandPagePage } from './land-page.page';
+import { LandPagePage } from './inicio.page';
 
 const routes: Routes = [
   {

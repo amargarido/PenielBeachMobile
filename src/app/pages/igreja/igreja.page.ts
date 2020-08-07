@@ -1,31 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-
-import { WordpressService } from '../../../services/wordpress.service';
-import { AuthenticationService } from '../../../services/authentication.service';
 import { environment } from 'src/environments/environment';
-;
+import { WordpressService} from '../../services/wordpress.service';
 
 @Component({
-  selector: 'app-mural',
-  templateUrl: './mural.page.html',
-  styleUrls: ['./mural.page.scss'],
+  selector: 'app-igreja',
+  templateUrl: './igreja.page.html',
+  styleUrls: ['./igreja.page.scss'],
 })
-export class MuralPage implements OnInit {
-
-  public mural: any = null;
-  public dados: { nome: string; valor: any; }[];
-
-  count = null;
-  idPaginaMural: number;
-  user = this.authService.getCurrentUser();
+export class IgrejaPage implements OnInit {
 
   constructor(
-    private wp: WordpressService,
-    private authService: AuthenticationService,
+    private wp: WordpressService
+  ){
+  
 
-  ) {
-
-    this.carregaMural();
+    this.carregaIgrejaPerfil();
   }
 
   ngOnInit() {
@@ -46,26 +35,29 @@ export class MuralPage implements OnInit {
   }
 
 
-  carregaMural() {
 
-    console.log('Chamado....getPaginaMural() ');
 
-    this.wp.getPaginaMural().then(response => {
+  carregaIgrejaPerfil() {
 
-      this.count = this.wp.totalAtividades;
-      this.mural = response;
+    console.log('Chamado....carregaIgrejaPerfil() ');
 
-      console.log('this.mural :');
-      console.log(this.mural);
+    this.wp.getPaginaIgreja().then(response => {
+
+
+      let igreja = response;
+
+      console.log('igreja :');
+      console.log(igreja);
 
       // setTimeout(() => this.populaDados(), 2000);
 
-      this.populaDados(this.mural);
+      // this.populaDados(this.mural);
 
     });
 
   }
 
+/*
   async populaDados(osDados) {
 
     if (!environment.production) {
@@ -104,8 +96,6 @@ export class MuralPage implements OnInit {
     console.log(this.dados);
 
   }
-
+*/
 
 }
-
-

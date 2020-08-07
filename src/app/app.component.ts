@@ -21,9 +21,9 @@ export class AppComponent {
 
   muralPages = [
     {
-      title: 'Land Page',
-      url: '/app/tabs/land-page',
-      icon: 'home'
+      title: 'Início',
+      url: '/app/tabs/inicio',
+      icon: 'caret-up'
     },
 
     {
@@ -83,26 +83,7 @@ export class AppComponent {
   async ngOnInit() {
     this.checkLoginStatus();
     this.listenForLoginEvents();
-
-    // this.swUpdate.available.subscribe(async res => {
-    //   const toast = await this.toastCtrl.create({
-    //     message: 'Update available!',
-    //     position: 'bottom',
-    //     buttons: [
-    //       {
-    //         role: 'cancel',
-    //         text: 'Reload'
-    //       }
-    //     ]
-    //   });
-
-    //   await toast.present();
-
-    //   toast
-    //     .onDidDismiss()
-    //     .then(() => this.swUpdate.activateUpdate())
-    //     .then(() => window.location.reload());
-    // });
+   
   }
 
   initializeApp() {
@@ -129,7 +110,7 @@ export class AppComponent {
 
       } else {
         // this.router.navigate(['login'])
-        this.router.navigate(['land-page'])
+        this.router.navigate(['inicio'])
 
       }
 
@@ -155,7 +136,7 @@ export class AppComponent {
   logout() {
     this.authService.logout().then(() => {
       // return this.router.navigate(['login']);
-      return this.router.navigate(['land-page']);
+      return this.router.navigate(['inicio']);
     });
   }
 

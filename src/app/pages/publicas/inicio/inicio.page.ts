@@ -6,21 +6,31 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { Platform } from '@ionic/angular';
 
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 
 
 @Component({
-  selector: 'app-land-page',
-  templateUrl: './land-page.page.html',
-  styleUrls: ['./land-page.page.scss'],
+  selector: 'app-inicio',
+  templateUrl: './inicio.page.html',
+  styleUrls: ['./inicio.page.scss'],
 })
 export class LandPagePage implements OnInit {
 
-  
+
+  categoriesPublicas = [
+
+    { name: 'Youtube',            slug: 'logo-youtube', navega:'videos'},
+    { name: 'Mural',              slug: 'business',     navega:'mural'},
+    
+];
+
+
+
   categories = [
 
     { name: 'Youtube',            slug: 'logo-youtube', navega:'videos'},
     { name: 'Mural',              slug: 'business',     navega:'mural'},
-    { name: 'Igreja',             slug: 'business'},
+    { name: 'Igreja',             slug: 'caret-up',     navega:'igreja'},    
     { name: 'Menu',               slug: 'speedometer'},
     { name: 'Célula',             slug: 'people'},
     { name: 'Perfil',             slug: 'person'},
@@ -49,6 +59,7 @@ export class LandPagePage implements OnInit {
 
   page = 1;
   count = null;
+  inicioLoggedIn: boolean = true;
 
   showSearchbar: boolean = false;
 
@@ -65,14 +76,31 @@ export class LandPagePage implements OnInit {
 
     this.user.subscribe(user => {
       if (user) {
+    
+        console.log( "If user YES");
         } else {
+          console.log( "If user NO");
       }
     });
   }
 
-  ngOnInit() {}
+ ngOnInit() {
 
-  ionViewDidLoad(){}
+    
+  
+  }
+
+
+  async checkInicioPageLoginStatus() {
+    this.inicioLoggedIn = await this.authService.isLoggedIn();
+
+    console.log( "this.inicioLoggedIn:");
+    console.log( this.inicioLoggedIn );
+  }
+
+  async ionViewDidEnter(){
+    this.checkInicioPageLoginStatus();
+  }
 
   goNavegacao(navega: String, name:String, slug: String){
 

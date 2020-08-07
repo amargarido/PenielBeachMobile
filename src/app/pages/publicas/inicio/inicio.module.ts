@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LandPagePageRoutingModule } from './land-page-routing.module';
+import { LandPagePageRoutingModule } from './inicio-routing.module';
 
-import { LandPagePage } from './land-page.page';
+import { LandPagePage } from './inicio.page';
 
 @NgModule({
   imports: [

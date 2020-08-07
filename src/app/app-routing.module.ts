@@ -29,41 +29,45 @@ const routes: Routes = [
   {
     path: 'atividades',
     loadChildren: () => import('./pages/atividades/atividades.module').then( m => m.AtividadesPageModule)
+    ,canActivate: [AuthGuardService]
   },
   {
     path: 'pedidos-oracao',
     loadChildren: () => import('./pages/pedidos-oracao/pedidos-oracao.module').then( m => m.PedidosOracaoPageModule)
-    //,canActivate: [AuthGuardService]
+    ,canActivate: [AuthGuardService]
   },
   {
     path: 'comunidade',
     loadChildren: () => import('./pages/comunidade/comunidade.module').then( m => m.ComunidadePageModule)
-    //,canActivate: [AuthGuardService]
-  },
-  {
-    path: 'logout',
-    loadChildren: () => import('./pages/logout/logout.module').then( m => m.LogoutPageModule)
+    ,canActivate: [AuthGuardService]
   },
   {
     path: 'culto-ao-vivo',
     loadChildren: () => import('./pages/culto-ao-vivo/culto-ao-vivo.module').then( m => m.CultoAoVivoPageModule)
+    ,canActivate: [AuthGuardService]
   },
   {
     path: 'escola-de-discipulos',
     loadChildren: () => import('./pages/escola-de-discipulos/escola-de-discipulos.module').then( m => m.EscolaDeDiscipulosPageModule)
+    ,canActivate: [AuthGuardService]
   },
   {
-    path: 'land-page',
-    loadChildren: () => import('./pages/publicas/land-page/land-page.module').then( m => m.LandPagePageModule)
-    //,canActivate: [AuthGuardService]
+    path: 'inicio',
+    loadChildren: () => import('./pages/publicas/inicio/inicio.module').then( m => m.LandPagePageModule)
+    
   },
   {
-    path: 'videos',
+    path: 'videos', // Público
     loadChildren: () => import('./pages/publicas/videos/videos.module').then( m => m.VideosPageModule)
   },
   {
-    path: 'mural',
+    path: 'mural', // Público
     loadChildren: () => import('./pages/publicas/mural/mural.module').then( m => m.MuralPageModule)
+  },
+  {
+    path: 'igreja',
+    loadChildren: () => import('./pages/igreja/igreja.module').then( m => m.IgrejaPageModule)
+    ,canActivate: [AuthGuardService]
   },
 ];
 
