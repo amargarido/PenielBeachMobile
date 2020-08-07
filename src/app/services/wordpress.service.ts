@@ -118,7 +118,7 @@ export class WordpressService {
         page: '' + page
       }
     };
-    return this.http.get<any[]>(GlobalConstants.siteApiURL + '/wp/v2/posts?_embed&status=private', options).pipe(
+    return this.http.get<any[]>(GlobalConstants.siteApiURL + '/wp/v2/posts?_embed', options).pipe(
       map(resp => {
 
         this.pagesComunidades = resp['headers'].get('x-wp-totalpages');

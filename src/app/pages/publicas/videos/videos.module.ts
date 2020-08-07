@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { VideosPageRoutingModule } from './videos-routing.module';
 import { VideosPage } from './videos.page';
 import { SharedModule } from '../../../common/shared/shared.module';
+// import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { SharedModule } from '../../../common/shared/shared.module';
     FormsModule,
     IonicModule,
     SharedModule,
+//    HttpClientModule,
     VideosPageRoutingModule
   ],
   declarations: [VideosPage]

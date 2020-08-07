@@ -24,10 +24,6 @@ export class AtividadesPage implements OnInit {
     private authService: AuthenticationService
   )
   { 
-
-
-
-
     this.user.subscribe(user => {
       if (user) {
         this.loadAtividadesPosts();
@@ -37,9 +33,7 @@ export class AtividadesPage implements OnInit {
     });
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   loadAtividadesPosts() {
 

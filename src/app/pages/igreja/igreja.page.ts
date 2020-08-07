@@ -13,8 +13,6 @@ export class IgrejaPage implements OnInit {
     private wp: WordpressService
   ){
   
-
-    this.carregaIgrejaPerfil();
   }
 
   ngOnInit() {
@@ -32,6 +30,8 @@ export class IgrejaPage implements OnInit {
     if (!environment.production) {
       console.log("ionViewDidEnter()");
     }
+
+    this.carregaIgrejaPerfil();
   }
 
 
