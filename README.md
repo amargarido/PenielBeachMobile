@@ -39,6 +39,70 @@ https://penielbeach.com.br/wp-json/buddypress/v1/activity?_embed&user_id=2
      }
 
 
+## XML API Reader
+
+  loadXML() {
+    this.http.get(GlobalConstants.canalYoutubeXML,
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'text/xml')
+          .append('Access-Control-Allow-Methods', 'GET')
+          .append('Access-Control-Allow-Origin', '*')
+          .append('Access-Control-Allow-Headers', "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method"),
+        responseType: 'text'
+      })
+      .subscribe((data) => {
+        this.parseXML(data)
+          .then((data) => {
+            this.xmlItems = data;
+          });
+      });
+  }
+
+
+  parseXML(data: string) {
+    
+    return new Promise(resolve => {
+      let arr = [],
+        parser = new xml2js.Parser(
+          {
+            trim: true,
+            explicitArray: true
+          });
+
+      parser.parseString(data, function (err, result) {
+
+        // console.dir( result);
+        let obj = result.feed; //root xml
+        for (let k in obj.entry) // entry -> nós com os dados dos vídeos
+        {
+          let item = obj.entry[k];
+
+
+
+          // console.dir( "item::");
+          // console.dir( item );
+          // console.dir( "item['media:group']::");
+          // console.dir( item['media:group']);
+          // let mediagroup:[] = item['media:group'];
+          // console.dir( "mediagroup[0]::");
+          // console.dir( mediagroup['medi']);
+
+
+          arr.push({
+            id: item.id,
+            title: item['title'],
+            videoID: item['yt:videoId'],
+            thumbnail: "https://i1.ytimg.com/vi/" + item['yt:videoId'] + "/hqdefault.jpg"
+
+          });
+        }
+
+        resolve(arr);
+      });
+    });
+  }
+
 
 
 
