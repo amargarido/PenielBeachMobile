@@ -1,18 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
-
-//import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import { GlobalConstants } from 'src/app/common/global-constants';
 
-
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
-//import 'rxjs/add/operator/map';
 import xml2js from 'xml2js';
-
-
 
 @Component({
   selector: 'app-videos',
@@ -22,7 +13,6 @@ import xml2js from 'xml2js';
 export class VideosPage implements OnInit {
 
   feeds: Array<string>;
-  private videosRefreshTime: number = 600; // seconds
   xmlItems: any;
 
   // OK https://www.googleapis.com/youtube/v3/search?
@@ -33,93 +23,19 @@ export class VideosPage implements OnInit {
   // &maxResults=10
   // &key=AIzaSyAihjQWgnE9RURPK_atUU7QPkwE44qK7nI
 
-  // 
 
   constructor(
-    //    private youtube: YoutubeVideoPlayer,
     public http: HttpClient,
-    public toastCtrl: ToastController,
-    private _sanitizer: DomSanitizer
-
+    public toastCtrl: ToastController
   ) { }
-
 
   ngOnInit() {
   }
 
 
 
-
-
-  loadXML() {
-    this.http.get(GlobalConstants.canalYoutubeXML,
-      {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'text/xml')
-          .append('Access-Control-Allow-Methods', 'GET')
-          .append('Access-Control-Allow-Origin', '*')
-          .append('Access-Control-Allow-Headers', "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method"),
-        responseType: 'text'
-      })
-      .subscribe((data) => {
-        this.parseXML(data)
-          .then((data) => {
-            this.xmlItems = data;
-          });
-      });
-  }
-
-
-  parseXML(data: string) {
-    return new Promise(resolve => {
-      let arr = [],
-        parser = new xml2js.Parser(
-          {
-            trim: true,
-            explicitArray: true
-          });
-
-      parser.parseString(data, function (err, result) {
-
-        // console.dir( result);
-        let obj = result.feed; //root xml
-        for (let k in obj.entry) // entry -> nós com os dados dos vídeos
-        {
-          let item = obj.entry[k];
-
-
-
-          // console.dir( "item::");
-          // console.dir( item );
-          // console.dir( "item['media:group']::");
-          // console.dir( item['media:group']);
-          // let mediagroup:[] = item['media:group'];
-          // console.dir( "mediagroup[0]::");
-          // console.dir( mediagroup['medi']);
-
-
-          arr.push({
-            id: item.id,
-            title: item['title'],
-            videoID: item['yt:videoId'],
-            thumbnail: "https://i1.ytimg.com/vi/" + item['yt:videoId'] + "/hqdefault.jpg"
-
-          });
-        }
-
-        resolve(arr);
-      });
-    });
-  }
-
-
-
-
   ionViewDidEnter() {
-
- //    this.loadXML();
-  this.fetchContent();
-
+    this.fetchContent();
   }
 
 
@@ -128,9 +44,7 @@ export class VideosPage implements OnInit {
     console.log("feed.id:" + feed.id);
 
     oVideo = feed.id;
-    // OK ??? this.youtube.openVideo(oVideo+''); //  hack: must conctenate as a string
-
-  } // itemSelected()
+  }
 
 
   fetchContent(): void {
@@ -145,18 +59,12 @@ export class VideosPage implements OnInit {
 
         this.feeds = data['entry'];
 
-        for(let index in this.feeds){
+        for (let index in this.feeds) {
 
-//        console.log(this.feeds[index]['id']);  // output: Apple Orange Banana 
-        this.feeds[index]['thumbnail'] =  "https://i1.ytimg.com/vi/" + this.feeds[index]['id'].substr(9) + "/hqdefault.jpg";
-         
-
-
-
+          //        console.log(this.feeds[index]['id']);  // output: Apple Orange Banana 
+          this.feeds[index]['thumbnail'] = "https://i1.ytimg.com/vi/" + this.feeds[index]['id'].substr(9) + "/hqdefault.jpg";
+          this.feeds[index]['youtubeVideo'] = "<iframe width='560'  height='315' src='https://www.youtube.com/embed/'"+ this.feeds[index]['id'].substr(9) + " frameborder='0' allowfullscreen></iframe>";
         }
-      
-
-        //        loading.dismiss();
       },
         (err: any) => {
 

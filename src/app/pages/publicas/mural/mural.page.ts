@@ -29,7 +29,6 @@ export class MuralPage implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
 
@@ -41,62 +40,48 @@ export class MuralPage implements OnInit {
 
   ionViewDidEnter() {
 
-    if( ! environment.production) {
-    console.log("ionViewDidEnter()");
+    if (!environment.production) {
+      console.log("ionViewDidEnter()");
     }
-    
   }
 
-  
 
-async populaDados(osDados){
+  async populaDados(osDados) {
 
-  if( !environment.production) {
-    
-    console.log("populaDados() this mural...");
-    console.log(osDados)
-  }
+    if (!environment.production) {
 
-    let re = /<iframe/gi; 
+      console.log("populaDados() this mural...");
+      console.log(osDados)
+    }
 
+    let re = /<iframe/gi; // RegEx
 
 
     this.dados = []; //  fundamental inicializar assim aqui !
-    
-    // mural.i9page_meta_fields._oembed_8c10d07cfebdf1d1063f72a7eb0be799[0]
-      for (let element in osDados.i9page_meta_fields) {
+
+    for (let element in osDados.i9page_meta_fields) {
 
 
-        let aString: String = osDados.i9page_meta_fields[element][0];
+      let aString: String = osDados.i9page_meta_fields[element][0];
 
-        if (aString.search(re) == -1 ) { 
-          continue;
-       } else { 
+      if (aString.search(re) == -1) {
+        continue;
+      } else {
 
         this.dados.push({
           'nome': element,
           'valor': osDados.i9page_meta_fields[element][0]
         });
 
-       }
-
-
-
-
-        // this.mural['aaa'][element]= osDados.i9page_meta_fields[element][0];
-
       }
 
 
-       
-
+    }
 
 
     console.log("NOVO dados:");
 
     console.log(this.dados);
-
-
 
   }
 

@@ -8,6 +8,8 @@ import { VideosPageRoutingModule } from './videos-routing.module';
 
 import { VideosPage } from './videos.page';
 
+import { SafeHtmlPipe } from '../../../pipes/safe-html.pipe';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,6 @@ import { VideosPage } from './videos.page';
     IonicModule,
     VideosPageRoutingModule
   ],
-  declarations: [VideosPage]
+  declarations: [VideosPage, SafeHtmlPipe]
 })
 export class VideosPageModule {}
