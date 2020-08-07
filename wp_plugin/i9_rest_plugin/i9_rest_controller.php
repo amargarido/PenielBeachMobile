@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Plugin URI: http://meta.eti.br
  * Description: i9 REST
  * Author: cloud9.dev.br
- * Version: 0.0.7
+ * Version: 0.0.8
  * License: LGPL version 2.1
  * Network: True
  */
@@ -89,8 +89,35 @@ class i9_rest_class_controller {
             'schema' => array( $this, 'get_item_schema' ),
 	    ) );
 
-	}
 
+        register_rest_field('page','content', array(
+            array(
+                   'get_callback'    => 'compasshb_do_shortcodes',
+                   'update_callback' => null,
+            ),
+                   'schema'          => array( $this, 'get_item_schema' ),// null,
+            
+        ));
+  
+
+	}
+///////////////////////////
+
+
+    public function compasshb_do_shortcodes( $object, $field_name, $request )
+    {
+    WPBMap::addAllMappedShortcodes(); // This does all the work
+
+    global $post;
+    $post = get_post ($object['id']);
+    $output['rendered'] = apply_filters( 'the_content', $post->post_content );
+
+    return $output;
+    }
+
+
+
+    /////////////////////////
 
     public function get_youtube( $request ) {
 

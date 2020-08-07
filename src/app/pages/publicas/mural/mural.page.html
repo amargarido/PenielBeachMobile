@@ -15,7 +15,7 @@
       <ion-card-subtitle>{{ mural.date_gmt |date: 'dd MMM yyy' }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <div [innerHTML]="mural.excerpt.rendered"></div>
+      <div [innerHTML]="mural.content.rendered"></div>
     </ion-card-content>
   </ion-card>
 

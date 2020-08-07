@@ -174,7 +174,7 @@ export class WordpressService {
       observe: "response" as "body",
     };
     return this.http.get<number>(
-      GlobalConstants.siteApiURL + '/wp/v2/pages?slug=mural', paginaoptions).toPromise();
+      GlobalConstants.siteApiURL + '/wp/v2/pages?slug=escola-discipulo', paginaoptions).toPromise();
 
   }
 
