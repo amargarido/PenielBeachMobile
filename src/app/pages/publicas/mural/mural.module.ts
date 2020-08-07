@@ -1,22 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
 import { MuralPageRoutingModule } from './mural-routing.module';
-
 import { MuralPage } from './mural.page';
-import { SafeHtmlPipe } from '../../../pipes/safe-html.pipe';
-
+import { SharedModule } from '../../../common/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     MuralPageRoutingModule
   ],
-  declarations: [MuralPage,SafeHtmlPipe]
+  declarations: [MuralPage]
 })
 export class MuralPageModule {}

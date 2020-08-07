@@ -103,7 +103,9 @@ https://penielbeach.com.br/wp-json/buddypress/v1/activity?_embed&user_id=2
     });
   }
 
+## Video Sizes
 
+https://metricool.com/youtube-image-and-videos-dimensions/
 
 
 

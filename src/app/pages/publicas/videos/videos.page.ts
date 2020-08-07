@@ -63,8 +63,14 @@ export class VideosPage implements OnInit {
 
           //        console.log(this.feeds[index]['id']);  // output: Apple Orange Banana 
           this.feeds[index]['thumbnail'] = "https://i1.ytimg.com/vi/" + this.feeds[index]['id'].substr(9) + "/hqdefault.jpg";
-          this.feeds[index]['youtubeVideo'] = "<iframe width='560'  height='315' src='https://www.youtube.com/embed/'"+ this.feeds[index]['id'].substr(9) + " frameborder='0' allowfullscreen></iframe>";
+          this.feeds[index]['youtubeVideo'] = "<iframe title=\"Vídeo Explicativo\" width=\"256\" height=\"144\" src=\"https://www.youtube.com/embed/"+this.feeds[index]['id'].substr(9)+"?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
+        
+          // v
+
+          // "<iframe title=\"Vídeo Explicativo\" width=\"640\" height=\"360\" src=\"https://www.youtube.com/embed/ojfhSSdUk2o?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>"
         }
+
+
       },
         (err: any) => {
 

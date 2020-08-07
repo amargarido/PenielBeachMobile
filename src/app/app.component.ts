@@ -16,7 +16,7 @@ import { Storage } from '@ionic/storage';
 })
 export class AppComponent {
 
-  dark: boolean = false;
+  dark: boolean = true;
   loggedIn: boolean = false;
 
   muralPages = [
