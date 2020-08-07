@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { WordpressService } from '../../../services/wordpress.service';
 import { AuthenticationService } from '../../../services/authentication.service';
-
+import { environment } from 'src/environments/environment';
+;
 
 @Component({
   selector: 'app-mural',
@@ -40,8 +41,9 @@ export class MuralPage implements OnInit {
 
   ionViewDidEnter() {
 
+    if( ! environment.production) {
     console.log("ionViewDidEnter()");
-
+    }
     
   }
 
@@ -49,21 +51,36 @@ export class MuralPage implements OnInit {
 
 async populaDados(osDados){
 
+  if( !environment.production) {
+    
     console.log("populaDados() this mural...");
     console.log(osDados)
+  }
 
-    this.dados = [];
+    let re = /<iframe/gi; 
+
+
+
+    this.dados = []; //  fundamental inicializar assim aqui !
     
     // mural.i9page_meta_fields._oembed_8c10d07cfebdf1d1063f72a7eb0be799[0]
       for (let element in osDados.i9page_meta_fields) {
 
 
-        
+        let aString: String = osDados.i9page_meta_fields[element][0];
+
+        if (aString.search(re) == -1 ) { 
+          continue;
+       } else { 
 
         this.dados.push({
           'nome': element,
           'valor': osDados.i9page_meta_fields[element][0]
         });
+
+       }
+
+
 
 
         // this.mural['aaa'][element]= osDados.i9page_meta_fields[element][0];

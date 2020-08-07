@@ -21,7 +21,7 @@ import { environment } from '../environments/environment';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 @NgModule({
-  declarations: [AppComponent, SafeHtmlPipe],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule, 
