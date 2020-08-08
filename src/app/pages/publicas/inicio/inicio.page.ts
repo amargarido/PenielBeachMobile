@@ -18,16 +18,17 @@ export class LandPagePage implements OnInit {
 
   categoriesPublicas = [
     { name: 'Youtube',            slug: 'logo-youtube', navega: 'videos' },
-    { name: 'Mural',              slug: 'business', navega: 'mural' },
+    { name: 'Mural',              slug: 'business',     navega: 'mural' },
   ];
 
   categories = [
 
     { name: 'Youtube',            slug: 'logo-youtube', navega: 'videos' },
-    { name: 'Mural',              slug: 'business', navega: 'mural' },
-    { name: 'Igreja',             slug: 'caret-up', navega: 'igreja' },
+    { name: 'Mural',              slug: 'business',     navega: 'mural' },
+    { name: 'Igreja',             slug: 'caret-up',     navega: 'igreja' },
+    { name: 'Membros',            slug: 'people',       navega: 'membros' },
     { name: 'Menu',               slug: 'speedometer' },
-    { name: 'Célula',             slug: 'people' },
+    { name: 'Célula',             slug: 'people-circle' },
     { name: 'Perfil',             slug: 'person' },
     { name: 'Configuração',       slug: 'settings' },
     { name: 'Reserva',            slug: 'pricetags' },

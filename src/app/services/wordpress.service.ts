@@ -14,6 +14,9 @@ export class WordpressService {
   pagesComunidades: any;
   totalAtividades = null;
   pagesAtividades: any;
+  totalMembros = null;
+  pagesMembros: any;
+
 
   totalLandings = null;
   pagesLandings: any;
@@ -22,8 +25,8 @@ export class WordpressService {
 
   constructor(
     private http: HttpClient
-    ) { }
- 
+  ) { }
+
 
   TTTgetLandingPages(page = 1): Observable<any[]> {
 
@@ -145,11 +148,8 @@ export class WordpressService {
         return data;
       })
     );
-  }
+  } // getComunidades
 
-  getComunidadeContent() { // 8:01
-
-  }
 
 
   /*****
@@ -167,7 +167,7 @@ export class WordpressService {
       GlobalConstants.siteApiURL + '/wp/v2/pages?slug=mural', paginaoptions).toPromise();
 
   }
-  
+
 
   async getPaginaMural(): Promise<any> {
 
@@ -188,13 +188,13 @@ export class WordpressService {
     };
     return this.http.get<any>(GlobalConstants.siteApiURL + '/wp/v2/pages/' + this.oretorno, options).
       toPromise().then(
-      resp => {
+        resp => {
 
-        let data = resp['body'];
+          let data = resp['body'];
 
-        return data;
-      }
-    );
+          return data;
+        }
+      );
   }
 
   // Mural
@@ -236,16 +236,67 @@ export class WordpressService {
     };
     return this.http.get<any>(GlobalConstants.siteApiURL + '/buddyboss/v1/members/' + this.oretorno, options).
       toPromise().then(
-      resp => {
+        resp => {
 
-        let data = resp['body'];
+          let data = resp['body'];
 
-        return data;
-      }
-    );
+          return data;
+        }
+      );
   }
   // Igreja
 
+  /**
+   * Membros
+   * 
+   * 
+   * Ver membros >  https://penielbeach.com.br/membros/ 
+  https://www.buddyboss.com/resources/api/#api-Members-GetBBMembers 
+  https://penielbeach.com.br/wp-json/buddyboss/v1/members?per_page=3&type=alphabetical
+  
+   */
+
+
+
+
+  getMembros(page = 1): Observable<any[]> {
+
+    let options = {
+      observe: "response" as "body",
+      params: {
+        per_page: '5',
+        type: 'alphabetical',
+        page: '' + page
+      }
+    };
+    return this.http.get<any[]>(GlobalConstants.siteApiURL + '/buddyboss/v1/members', options).pipe(
+      map(resp => {
+
+        this.pagesMembros = resp['headers'].get('x-wp-totalpages');
+        this.totalMembros = resp['headers'].get('x-wp-total');
+
+        let data = resp['body'];
+
+        for (let membro of data) {
+
+          console.log('membro:');
+          console.log(membro);
+          //  trata imagem
+
+          try {
+            membro.media_url = membro['avatar_urls']['thumb'];
+
+            console.log(membro.media_url);
+          } catch (error) {
+            console.log('wordpress.service|getMembros.error:');
+            console.log(error);
+          }
+
+        }
+        return data;
+      })
+    );
+  } // getMembros
 
 
 

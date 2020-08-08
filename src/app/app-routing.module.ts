@@ -27,6 +27,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
+    path: 'videos', // Público
+    loadChildren: () => import('./pages/publicas/videos/videos.module').then( m => m.VideosPageModule)
+  },
+  {
+    path: 'mural', // Público
+    loadChildren: () => import('./pages/publicas/mural/mural.module').then( m => m.MuralPageModule)
+  },
+  {
     path: 'atividades',
     loadChildren: () => import('./pages/atividades/atividades.module').then( m => m.AtividadesPageModule)
     ,canActivate: [AuthGuardService]
@@ -57,17 +65,13 @@ const routes: Routes = [
     
   },
   {
-    path: 'videos', // Público
-    loadChildren: () => import('./pages/publicas/videos/videos.module').then( m => m.VideosPageModule)
-  },
-  {
-    path: 'mural', // Público
-    loadChildren: () => import('./pages/publicas/mural/mural.module').then( m => m.MuralPageModule)
-  },
-  {
     path: 'igreja',
     loadChildren: () => import('./pages/igreja/igreja.module').then( m => m.IgrejaPageModule)
     ,canActivate: [AuthGuardService]
+  },
+  {
+    path: 'membros',
+    loadChildren: () => import('./pages/membros/membros.module').then( m => m.MembrosPageModule)
   },
 ];
 
