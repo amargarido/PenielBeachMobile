@@ -73,6 +73,10 @@ const routes: Routes = [
     path: 'membros',
     loadChildren: () => import('./pages/membros/membros.module').then( m => m.MembrosPageModule)
   },
+  {
+    path: 'mensagens',
+    loadChildren: () => import('./pages/mensagens/mensagens.module').then( m => m.MensagensPageModule)
+  },
 ];
 
 @NgModule({

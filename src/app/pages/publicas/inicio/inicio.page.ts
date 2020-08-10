@@ -27,13 +27,15 @@ export class LandPagePage implements OnInit {
     { name: 'Mural',              slug: 'business',     navega: 'mural' },
     { name: 'Igreja',             slug: 'caret-up',     navega: 'igreja' },
     { name: 'Membros',            slug: 'people',       navega: 'membros' },
+    { name: 'Mensagem recebida',  slug: 'mail',         navega: 'mensagens' }, // notificacoes e mensagens
+
     { name: 'Menu',               slug: 'speedometer' },
     { name: 'Célula',             slug: 'people-circle' },
     { name: 'Perfil',             slug: 'person' },
     { name: 'Configuração',       slug: 'settings' },
     { name: 'Reserva',            slug: 'pricetags' },
 
-    { name: 'Mensagem recebida',  slug: 'mail' },
+    
     { name: 'Mensagem aberta',    slug: 'mail-open' },
     { name: 'Enviando mensagem',  slug: 'mail-unread' },
 

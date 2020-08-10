@@ -12,11 +12,15 @@ export class WordpressService {
 
   totalComunidades = null;
   pagesComunidades: any;
+
   totalAtividades = null;
   pagesAtividades: any;
+
   totalMembros = null;
   pagesMembros: any;
 
+  totalMensagens = null;
+  pagesMensagens: any;
 
   totalLandings = null;
   pagesLandings: any;
@@ -297,6 +301,51 @@ export class WordpressService {
       })
     );
   } // getMembros
+
+
+/**
+ * Notificações e Mensagens
+ * 
+ */
+
+
+
+getMensagens(page = 1): Observable<any[]> {
+
+  let options = {
+    observe: "response" as "body",
+    params: {
+      page: '' + page
+    }
+  };
+  return this.http.get<any[]>(GlobalConstants.siteApiURL + '/buddyboss/v1/messages', options).pipe(
+    map(resp => {
+
+      this.pagesMensagens = resp['headers'].get('x-wp-totalpages');
+      this.totalMensagens = resp['headers'].get('x-wp-total');
+
+      let data = resp['body'];
+
+      for (let mensagen of data) {
+
+        console.log('mensagen:');
+        console.log(mensagen);
+        //  trata imagem
+
+        try {
+          mensagen.media_url = mensagen['avatar'][0]['thumb'];
+
+          console.log(mensagen.media_url);
+        } catch (error) {
+          console.log('wordpress.service|getMensagens.error:');
+          console.log(error);
+        }
+
+      }
+      return data;
+    })
+  );
+} // getMensagens
 
 
 
