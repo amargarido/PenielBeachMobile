@@ -216,7 +216,7 @@ export class WordpressService {
       observe: "response" as "body",
     };
     return this.http.get<number>(
-      GlobalConstants.siteApiURL + '/buddyboss/v1/members?search=igreja peniel', paginaoptions).toPromise();
+      GlobalConstants.siteApiURL + '/buddyboss/v1/members?search=igreja%20peniel', paginaoptions).toPromise();
 
   }
 

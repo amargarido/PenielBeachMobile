@@ -1,5 +1,5 @@
 {
-  "appId": "br.eti.meta.mobile",
+  "appId": "br.dev.cloud9.mobile",
   "appName": "peniel_beach",
   "bundledWebRuntime": false,
   "npmClient": "npm",
