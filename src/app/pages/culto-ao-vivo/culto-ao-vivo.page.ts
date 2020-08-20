@@ -1,7 +1,5 @@
 import { Component, OnInit/*, LoadingController*/ } from '@angular/core';
 
-import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
-
 import { HttpClient } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import { GlobalConstants } from 'src/app/common/global-constants';
@@ -20,7 +18,6 @@ export class CultoAoVivoPage implements OnInit {
 
 
   constructor(
-    private youtube: YoutubeVideoPlayer,
     public http       : HttpClient,
     public toastCtrl  : ToastController,
 //    public loadingCtrl: LoadingController
@@ -33,11 +30,6 @@ export class CultoAoVivoPage implements OnInit {
   }
 
 
-  
-  teste(){
-
-    this.youtube.openVideo('myvideoid');
-  }
 
   
   ionViewDidEnter(){
@@ -75,12 +67,13 @@ export class CultoAoVivoPage implements OnInit {
         });
   } // fetchContent()
 
+ 
   itemSelected(event:any,  feed:any) {
     let oVideo : string;
     console.log("feed.id:"+feed.id);
 
     oVideo = feed.id;
-    this.youtube.openVideo(oVideo+''); //  hack: must conctenate as a string
+
 
   } // itemSelected()
 

@@ -15,7 +15,6 @@ import { AuthenticationService } from './services/authentication.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WordpressService } from './services/wordpress.service';
 import { JwtInterceptor } from './interceptors/JwtInterceptor';
-import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player/ngx';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
@@ -27,7 +26,9 @@ declarations: [AppComponent],
     IonicModule.forRoot(), 
     AppRoutingModule, 
     IonicStorageModule.forRoot(), 
-    HttpClientModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    HttpClientModule, 
+    ServiceWorkerModule.register('ngsw-worker.js', 
+      { enabled: environment.production }),
   ],
   providers: [
     StatusBar,
@@ -35,7 +36,6 @@ declarations: [AppComponent],
     AuthGuardService,
     AuthenticationService,
     WordpressService,
-    YoutubeVideoPlayer,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }    
   ],
