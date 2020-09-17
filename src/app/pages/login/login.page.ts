@@ -32,8 +32,8 @@ export class LoginPage implements OnInit {
     this.menu.enable(true);
 
     this.userForm = this.fb.group({
-      username: ['manobeto', Validators.required],
-      password: ['Cloud9Mano123', Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
       email: ''
     });
   }
